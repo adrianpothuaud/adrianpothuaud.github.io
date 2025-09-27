@@ -1,0 +1,149 @@
+form {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fefefe;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #495057;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #6c757d;
+  background: #fefefe;
+  box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.1);
+  transform: translateY(-1px);
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+form button {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: #495057;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form button:hover {
+  background: #343a40;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+form button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(73, 80, 87, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Animation d'entrée pour le formulaire */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+form {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Messages de succès et d'erreur */
+.message {
+  max-width: 500px;
+  margin: 1rem auto;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  position: relative;
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.message.success {
+  background: #d1f2eb;
+  border: 1px solid #7dcea0;
+  color: #186a3b;
+}
+
+.message.error {
+  background: #fadbd8;
+  border: 1px solid #f1948a;
+  color: #a93226;
+}
+
+.message p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.message-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.message-close:hover {
+  opacity: 1;
+}
+
+/* État de chargement du bouton */
+form button:disabled {
+  background: #adb5bd;
+  cursor: not-allowed;
+  transform: none;
+}
+
+form button:disabled:hover {
+  background: #adb5bd;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
