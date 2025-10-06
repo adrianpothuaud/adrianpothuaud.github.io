@@ -1,4 +1,10 @@
 {
+  "cucumber.features": [
+    "test/features/**/*.feature"
+  ],
+  "cucumber.glue": [
+    "test/steps/**/*.ts"
+  ],
   "editor.codeActionsOnSave": {
     "source.addMissingImports.ts": "explicit",
     "source.fixAll.eslint": "explicit",
