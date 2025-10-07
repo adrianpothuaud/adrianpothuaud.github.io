@@ -1,0 +1,177 @@
+@use "@picocss/pico/scss/pico";
+@use "../styles/globals.scss";
+
+// Custom styles pour améliorer Pico.CSS
+.hero {
+  padding: 3rem 0;
+  margin-bottom: 3rem;
+  
+  .lead {
+    font-size: 1.2rem;
+    color: var(--muted-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .button-group {
+    margin-top: 2rem;
+    
+    a {
+      margin-right: 1rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.profile-card {
+  background: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  height: fit-content;
+
+  h3 {
+    margin-bottom: 1rem;
+    color: var(--primary);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--muted-border-color);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.blog-card {
+  background: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    margin-bottom: 0.5rem;
+    
+    a {
+      text-decoration: none;
+      color: var(--primary);
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  small {
+    color: var(--muted-color);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+  }
+
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: auto;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.cta-section {
+  background: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--border-radius);
+  padding: 3rem 2rem;
+  margin: 3rem 0;
+  text-align: center;
+}
+
+// Navigation améliorée
+nav {
+  border-bottom: 1px solid var(--muted-border-color);
+  margin-bottom: 0;
+  
+  ul {
+    li {
+      a {
+        color: var(--color);
+        
+        &:hover {
+          color: var(--primary);
+        }
+      }
+      
+      strong {
+        color: var(--primary);
+      }
+    }
+  }
+}
+
+// Footer
+footer {
+  margin-top: 4rem;
+  
+  p {
+    color: var(--muted-color);
+    margin: 0;
+    
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Responsive improvements
+@media (max-width: 768px) {
+  .hero {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .button-group {
+      a {
+        display: block;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+    }
+  }
+
+  .blog-card {
+    margin-bottom: 2rem;
+  }
+}
+
+// Dark mode improvements
+[data-theme="dark"] {
+  .profile-card,
+  .blog-card,
+  .cta-section {
+    background: var(--card-background-color);
+    border-color: var(--card-border-color);
+  }
+}

@@ -1,0 +1,329 @@
+// Styles pour les pages de blog
+.blog-list {
+  .blog-post-preview {
+    background: var(--card-background-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+
+    h2 {
+      margin-bottom: 0.5rem;
+      
+      a {
+        text-decoration: none;
+        color: var(--primary);
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      small {
+        color: var(--muted-color);
+      }
+
+      .tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+    }
+
+    .read-more {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Styles pour les projets
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.project-card {
+  background: var(--card-background-color);
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+
+    h3 {
+      margin: 0;
+      flex: 1;
+      
+      a {
+        text-decoration: none;
+        color: var(--primary);
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .technologies {
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .project-links {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .primary-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .external-link,
+    .github-link {
+      color: var(--muted-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      
+      &:hover {
+        color: var(--primary);
+      }
+    }
+  }
+}
+
+// Styles pour les détails de projet et articles
+.project-detail,
+.blog-post {
+  max-width: 800px;
+  margin: 0 auto;
+
+  .project-header,
+  .post-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--muted-border-color);
+
+    .project-title-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      h1 {
+        margin: 0;
+        flex: 1;
+      }
+    }
+
+    .project-description {
+      font-size: 1.1rem;
+      color: var(--muted-color);
+      margin: 1rem 0;
+    }
+
+    .project-meta,
+    .post-meta {
+      margin: 1rem 0;
+      color: var(--muted-color);
+      
+      .technologies {
+        margin-top: 0.5rem;
+        
+        strong {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    .project-actions {
+      margin-top: 1.5rem;
+      
+      a {
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .post-tags {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  }
+
+  .project-content,
+  .post-content {
+    line-height: 1.7;
+    
+    // Améliorer le rendu du markdown
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    pre {
+      background: var(--code-background-color);
+      border: 1px solid var(--muted-border-color);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    code {
+      background: var(--code-background-color);
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+
+    blockquote {
+      border-left: 4px solid var(--primary);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: var(--muted-color);
+    }
+
+    ul, ol {
+      margin: 1rem 0;
+      padding-left: 2rem;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+    }
+  }
+
+  .project-footer,
+  .post-footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--muted-border-color);
+    
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Tags et statuts
+.tag,
+.tech-tag {
+  background: var(--primary);
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.tech-tag {
+  background: var(--secondary);
+}
+
+.status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  &.status-actif,
+  &.status-active {
+    background: #22c55e;
+    color: white;
+  }
+
+  &.status-en-cours,
+  &.status-in-progress {
+    background: #f59e0b;
+    color: white;
+  }
+
+  &.status-terminé,
+  &.status-completed {
+    background: #6b7280;
+    color: white;
+  }
+
+  &.status-archivé,
+  &.status-archived {
+    background: #ef4444;
+    color: white;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-header .project-title-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .project-links {
+    flex-direction: column;
+    
+    a {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .blog-post-preview .meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
