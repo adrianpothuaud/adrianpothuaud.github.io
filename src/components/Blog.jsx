@@ -38,38 +38,27 @@ const Blog = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-50px' }}
                             transition={{ duration: 0.45, delay: idx * 0.1 }}
-                            className="glass-panel"
-                            style={{
-                                padding: '1.75rem',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                cursor: 'pointer',
-                                width: '100%'
-                            }}
-                            whileHover={{ y: -5 }}
+                            className="glass-panel blog-card"
+                            whileHover={{ y: -4 }}
                         >
                             {article.tags && article.tags.length > 0 && (
-                                <div style={{ marginBottom: '0.875rem' }}>
-                                    <span style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-accent-blue)', background: 'var(--color-accent-blue-light)', padding: '0.25rem 0.6rem', borderRadius: 'var(--radius-full)' }}>
-                                        {article.tags[0]}
-                                    </span>
+                                <div className="blog-card-tags">
+                                    {article.tags.slice(0, 2).map(tag => (
+                                        <span key={tag} className="blog-card-tag">{tag}</span>
+                                    ))}
                                 </div>
                             )}
 
-                            <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', marginBottom: '0.75rem', lineHeight: 1.4, letterSpacing: '-0.01em' }}>
-                                {article.title}
-                            </h3>
+                            <h3 className="blog-card-title">{article.title}</h3>
 
-                            <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.65, marginBottom: '1.25rem', flexGrow: 1, fontSize: '0.9rem' }}>
-                                {article.excerpt}
-                            </p>
+                            <p className="blog-card-excerpt">{article.excerpt}</p>
 
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1rem', borderTop: '1px solid var(--color-border)' }}>
-                                <div style={{ display: 'flex', gap: '1rem', color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>
-                                    {article.date && <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}><Calendar size={13} /> {article.date}</span>}
-                                    {article.readTime && <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}><Clock size={13} /> {article.readTime}</span>}
+                            <div className="blog-card-footer">
+                                <div className="blog-card-meta">
+                                    {article.date && <span><Calendar size={13} /> {article.date}</span>}
+                                    {article.readTime && <span><Clock size={13} /> {article.readTime}</span>}
                                 </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--color-accent-blue)', fontWeight: 600, fontSize: '0.82rem' }}>
+                                <div className="blog-card-read">
                                     Lire <ChevronRight size={14} />
                                 </div>
                             </div>
