@@ -1,19 +1,39 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, MapPin, Linkedin, BookOpen } from 'lucide-react';
+import { Send, MapPin, Linkedin, BookOpen, CheckCircle, AlertCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { APP_CONFIG } from '../config';
 
 const Contact = () => {
     const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsSubmitting(true);
-        setTimeout(() => {
-            alert("Ce formulaire est une démonstration pour le moment.");
-            setIsSubmitting(false);
-            setFormState({ name: '', email: '', message: '' });
-        }, 1500);
+        setSubmitStatus('sending');
+
+        const templateParams = {
+            from_name: formState.name,
+            reply_to: formState.email,
+            message: formState.message,
+        };
+
+        emailjs.send(
+            APP_CONFIG.EMAILJS_SERVICE_ID,
+            APP_CONFIG.EMAILJS_TEMPLATE_ID,
+            templateParams,
+            APP_CONFIG.EMAILJS_PUBLIC_KEY
+        )
+            .then(() => {
+                setSubmitStatus('success');
+                setFormState({ name: '', email: '', message: '' });
+                setTimeout(() => setSubmitStatus('idle'), 5000);
+            })
+            .catch((error) => {
+                console.error('EmailJS error:', error);
+                setSubmitStatus('error');
+                setTimeout(() => setSubmitStatus('idle'), 5000);
+            });
     };
 
     const inputStyle = {
@@ -144,25 +164,39 @@ const Contact = () => {
 
                         <button
                             type="submit"
-                            disabled={isSubmitting}
+                            disabled={submitStatus === 'sending'}
                             className="btn-primary"
                             style={{
                                 justifyContent: 'center',
-                                opacity: isSubmitting ? 0.7 : 1,
-                                cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                                opacity: submitStatus === 'sending' ? 0.7 : 1,
+                                cursor: submitStatus === 'sending' ? 'not-allowed' : 'pointer',
                                 background: 'var(--gradient-primary)',
                                 padding: '0.9rem',
                                 borderRadius: 'var(--radius-md)',
                                 fontSize: '0.95rem',
                             }}
                         >
-                            {isSubmitting ? 'Envoi en cours...' : (
+                            {submitStatus === 'sending' ? 'Envoi en cours...' : (
                                 <>
                                     Envoyer le message
                                     <Send size={16} />
                                 </>
                             )}
                         </button>
+
+                        {submitStatus === 'success' && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#16a34a', fontSize: '0.9rem', fontWeight: 500 }}>
+                                <CheckCircle size={18} />
+                                Message envoyé avec succès ! Je vous répondrai rapidement.
+                            </div>
+                        )}
+
+                        {submitStatus === 'error' && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#dc2626', fontSize: '0.9rem', fontWeight: 500 }}>
+                                <AlertCircle size={18} />
+                                Une erreur est survenue. Veuillez réessayer ou me contacter via LinkedIn.
+                            </div>
+                        )}
                     </form>
                 </motion.div>
             </div>
