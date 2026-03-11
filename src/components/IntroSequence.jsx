@@ -7,16 +7,16 @@ const IntroSequence = ({ onComplete }) => {
     const [step, setStep] = useState(0);
 
     useEffect(() => {
-        // Sequence timing logic
-        // Step 0: The Evolution (Hier, Aujourd'hui, Demain) - 0 to 5s
-        // Step 1: The Crash (Realistic Error) - 5 to 10s
-        // Step 2: The Solution (Quality) - 10 to 14s
-        // Step 3: Finish - 14s+
+        // Sequence timing logic - Ralenti suite feedback
+        // Step 0: The Evolution (Hier, Aujourd'hui, Demain) - 0 to 7s
+        // Step 1: The Crash (Realistic Error) - 7 to 14s
+        // Step 2: The Solution (Quality) - 14 to 19s
+        // Step 3: Finish - 19s+
         const timers = [
-            setTimeout(() => setStep(1), 5000),
-            setTimeout(() => setStep(2), 10500),
-            setTimeout(() => setStep(3), 14500),
-            setTimeout(onComplete, 15500)
+            setTimeout(() => setStep(1), 7000),
+            setTimeout(() => setStep(2), 14000),
+            setTimeout(() => setStep(3), 19000),
+            setTimeout(onComplete, 20000)
         ];
 
         return () => timers.forEach(clearTimeout);

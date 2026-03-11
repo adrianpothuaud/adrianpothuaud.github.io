@@ -41,6 +41,7 @@ const Header = () => {
                         <li><a href="#services" style={{ fontSize: '0.9rem', fontWeight: 500, color: 'var(--color-text-secondary)' }}>Formations</a></li>
                         <li><a href="#experience" style={{ fontSize: '0.9rem', fontWeight: 500, color: 'var(--color-text-secondary)' }}>Parcours</a></li>
                         <li><a href="#testimonials" style={{ fontSize: '0.9rem', fontWeight: 500, color: 'var(--color-text-secondary)' }}>Avis</a></li>
+                        <li><a href="#blog" style={{ fontSize: '0.9rem', fontWeight: 500, color: 'var(--color-text-secondary)' }}>Blog</a></li>
                         <li>
                             <a href="#contact" style={{
                                 fontSize: '0.9rem',

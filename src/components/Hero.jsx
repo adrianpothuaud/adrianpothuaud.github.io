@@ -1,78 +1,85 @@
 import { motion } from 'framer-motion';
 import { Terminal, ShieldCheck, Zap, Code2 } from 'lucide-react';
+import StorySlider from './StorySlider';
 
 const Hero = () => {
     return (
         <section
             style={{
-                minHeight: '80vh',
+                minHeight: '90vh',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                padding: 'var(--space-2xl) 0'
+                padding: 'var(--space-2xl) 0',
+                paddingTop: '100px'
             }}
         >
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                style={{ textAlign: 'center', maxWidth: '800px' }}
-            >
-                <div style={{ display: 'inline-block', padding: '0.5rem 1rem', background: 'var(--color-bg-surface)', borderRadius: 'var(--radius-full)', border: '1px solid rgba(255,255,255,0.1)', marginBottom: 'var(--space-md)' }}>
-                    <span style={{ color: 'var(--color-accent-blue)', fontWeight: 600, fontSize: '0.9rem' }}>
-                        Expert QA & Automatisation
-                    </span>
-                </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '4rem', alignItems: 'center', width: '100%' }}>
+                <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
+                    style={{ textAlign: 'left' }}
+                >
+                    <div style={{ display: 'inline-block', padding: '0.5rem 1rem', background: 'var(--color-bg-surface)', borderRadius: 'var(--radius-full)', border: '1px solid rgba(255,255,255,0.1)', marginBottom: 'var(--space-md)' }}>
+                        <span style={{ color: 'var(--color-accent-red)', fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-accent-red)', animation: 'pulse 2s infinite' }}></span>
+                            Il est temps d'arrêter la casse.
+                        </span>
+                    </div>
 
-                <h1 style={{ fontSize: '3.5rem', marginBottom: 'var(--space-md)', lineHeight: 1.1 }}>
-                    Sécurisez vos déploiements avec <br />
-                    <span className="text-gradient">Adrian Pothuaud</span>
-                </h1>
+                    <h1 style={{ fontSize: '3.5rem', marginBottom: 'var(--space-md)', lineHeight: 1.1 }}>
+                        Crashes, bugs, régressions : <br />
+                        <span className="text-gradient">Stoppez l'hémorragie.</span>
+                    </h1>
 
-                <p style={{ fontSize: '1.25rem', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-xl)', lineHeight: 1.6 }}>
-                    J'aide les équipes de développement à livrer plus vite et avec confiance grâce
-                    à des stratégies de test automatisées robustes. Formation, coaching et intégration.
-                </p>
+                    <p style={{ fontSize: '1.15rem', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-xl)', lineHeight: 1.6 }}>
+                        L'automatisation des tests n'est pas qu'un processus technique : c'est <b>le bouclier qui garantit une expérience utilisateur fluide.</b><br /><br />
+                        Grâce à mes formations en entreprise et mon expertise sur Playwright, Cypress et WDIO, vos équipes apprendront à sécuriser drastiquement vos déploiements.
+                    </p>
 
-                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                    <button style={{
-                        background: 'var(--color-accent-blue)',
-                        color: '#fff',
-                        padding: '0.75rem 1.5rem',
-                        borderRadius: 'var(--radius-sm)',
-                        fontWeight: 600,
-                        transition: 'background 0.2s'
-                    }}
-                        onMouseEnter={(e) => e.target.style.background = '#2563eb'}
-                        onMouseLeave={(e) => e.target.style.background = 'var(--color-accent-blue)'}
-                    >
-                        Voir mes formations
-                    </button>
+                    <div style={{ display: 'flex', gap: '1rem' }}>
+                        <a href="#services" style={{
+                            background: 'var(--color-accent-blue)',
+                            color: '#fff',
+                            padding: '0.75rem 1.5rem',
+                            borderRadius: 'var(--radius-sm)',
+                            fontWeight: 600,
+                            display: 'inline-block'
+                        }}>
+                            Découvrir les Formations
+                        </a>
 
-                    <button style={{
-                        background: 'transparent',
-                        color: 'var(--color-text-primary)',
-                        border: '1px solid var(--color-text-secondary)',
-                        padding: '0.75rem 1.5rem',
-                        borderRadius: 'var(--radius-sm)',
-                        fontWeight: 500,
-                        transition: 'all 0.2s'
-                    }}
-                        onMouseEnter={(e) => { e.target.style.borderColor = 'var(--color-accent-blue)'; e.target.style.color = 'var(--color-accent-blue)' }}
-                        onMouseLeave={(e) => { e.target.style.borderColor = 'var(--color-text-secondary)'; e.target.style.color = 'var(--color-text-primary)' }}
-                    >
-                        Me contacter
-                    </button>
-                </div>
-            </motion.div>
+                        <a href="#contact" style={{
+                            background: 'transparent',
+                            color: 'var(--color-text-primary)',
+                            border: '1px solid var(--color-text-secondary)',
+                            padding: '0.75rem 1.5rem',
+                            borderRadius: 'var(--radius-sm)',
+                            fontWeight: 500,
+                            display: 'inline-block'
+                        }}>
+                            Discuter d'un projet
+                        </a>
+                    </div>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                    <StorySlider />
+                </motion.div>
+            </div>
 
             {/* Tech Stack Banner */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 1 }}
-                style={{ marginTop: 'var(--space-2xl)', display: 'flex', gap: '3rem', flexWrap: 'wrap', justifyContent: 'center', opacity: 0.7 }}
+                transition={{ delay: 0.8, duration: 1 }}
+                style={{ marginTop: 'var(--space-2xl)', display: 'flex', gap: '3rem', flexWrap: 'wrap', justifyContent: 'center', opacity: 0.7, width: '100%' }}
             >
                 {[
                     { icon: Terminal, name: 'Cypress' },
