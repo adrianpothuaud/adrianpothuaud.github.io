@@ -6,9 +6,9 @@ export const APP_CONFIG = {
 
     // SEO Variables
     SITE_URL: "https://adrianpothuaud.github.io",
-    META_DESCRIPTION: "Adrian Pothuaud - Consultant et Formateur Expert en Automatisation de Tests (Selenium, Cypress, Playwright, WebdriverIO)",
+    META_DESCRIPTION: "Adrian Pothuaud - Senior QA Engineer (10 ans d'expérience) & Formateur Expert en Automatisation de Tests (Cypress, Playwright, WebdriverIO, Appium). Articles Medium sur l'IA appliquée aux tests.",
 
     // You can add more global configs here if needed
     AUTHOR_NAME: "Adrian Pothuaud",
-    AUTHOR_ROLE: "Expert QA & Automatisation",
+    AUTHOR_ROLE: "Senior QA Engineer & Formateur (10 ans XP)",
 };

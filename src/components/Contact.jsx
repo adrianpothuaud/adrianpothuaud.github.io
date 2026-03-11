@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin } from 'lucide-react';
+import { Send, MapPin, Linkedin, BookOpen } from 'lucide-react';
 
 const Contact = () => {
     const [formState, setFormState] = useState({ name: '', email: '', message: '' });
@@ -43,8 +43,22 @@ const Contact = () => {
                             <div style={{ padding: '10px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '50%', color: 'var(--color-accent-blue)' }}>
                                 <MapPin size={20} />
                             </div>
-                            <span style={{ fontSize: '1rem' }}>Indépendant / Remote France</span>
+                            <span style={{ fontSize: '1rem' }}>Paris, Île-de-France · Remote France</span>
                         </div>
+
+                        <a href="https://www.linkedin.com/in/adrianpothuaud/" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--color-text-secondary)', textDecoration: 'none' }}>
+                            <div style={{ padding: '10px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '50%', color: 'var(--color-accent-blue)', flexShrink: 0 }}>
+                                <Linkedin size={20} />
+                            </div>
+                            <span style={{ fontSize: '1rem' }}>LinkedIn : Adrian Pothuaud</span>
+                        </a>
+
+                        <a href="https://medium.com/@adrianpothuaud" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--color-text-secondary)', textDecoration: 'none' }}>
+                            <div style={{ padding: '10px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '50%', color: 'var(--color-accent-blue)', flexShrink: 0 }}>
+                                <BookOpen size={20} />
+                            </div>
+                            <span style={{ fontSize: '1rem' }}>Medium : @adrianpothuaud</span>
+                        </a>
                     </div>
                 </motion.div>
 
