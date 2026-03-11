@@ -8,19 +8,19 @@ tags: ["RAG", "Cypress", "Ollama", "AI", "LLM"]
 mediumUrl: "https://medium.com/@adrianpothuaud/creating-a-rag-process-for-selectors-using-cypress-and-ollama"
 ---
 
-This article is an evolution of my [previous article about stabilising test automation through WebdriverIO and LLMs](/blog/2-ai-rag-automation).
+Cet article fait suite à mon [précédent article sur la stabilisation de l'automatisation des tests avec WebdriverIO et les LLMs](/blog/2-ai-rag-automation).
 
-Automated testing is evolving fast, and with the rise of Large Language Models (LLMs), we can now make our test suites smarter and more robust. In this article, I'll show you how I built a Retrieval-Augmented Generation (RAG) process for generating Cypress selectors using Ollama, making end-to-end tests more maintainable and less brittle.
+Les tests automatisés évoluent rapidement, et avec l'essor des Grands Modèles de Langage (LLMs), nous pouvons désormais rendre nos suites de tests plus intelligentes et plus robustes. Dans cet article, je vais vous montrer comment j'ai construit un processus de Retrieval-Augmented Generation (RAG) pour générer des sélecteurs Cypress à l'aide d'Ollama, afin de rendre les tests end-to-end plus maintenables et moins fragiles.
 
-## Why Use LLMs and Ollama for Test Automation?
+## Pourquoi utiliser les LLMs et Ollama pour l'automatisation des tests ?
 
-Selectors are the backbone of UI test automation. But as UIs change, selectors break, and maintaining them becomes a pain. What if you could describe the element you want, and an AI would generate the best selector for you — using your own DOM as context?
+Les sélecteurs sont la colonne vertébrale des tests d'automatisation d'interface. Mais à mesure que les interfaces évoluent, les sélecteurs se cassent, et leur maintenance devient un calvaire. Et si vous pouviez simplement décrire l'élément que vous cherchez, et qu'une IA génère le meilleur sélecteur pour vous — en utilisant votre propre DOM comme contexte ?
 
-That's where LLMs and Ollama come in. Ollama lets you run powerful open-source LLMs locally, keeping your data private and your feedback loop fast. By combining Cypress, Ollama, and a bit of RAG magic, you can automate selector generation and make your tests more resilient.
+C'est là qu'interviennent les LLMs et Ollama. Ollama vous permet d'exécuter de puissants LLMs open-source en local, ce qui protège la confidentialité de vos données et accélère la boucle de retour. En combinant Cypress, Ollama et un peu de magie RAG, vous pouvez automatiser la génération de sélecteurs et rendre vos tests bien plus résilients.
 
-## Project Structure Overview
+## Vue d'ensemble de la structure du projet
 
-Here's a quick look at the project structure:
+Voici un aperçu de la structure du projet :
 
 ```
 cypress-rag/
@@ -40,45 +40,45 @@ cypress-rag/
 └── tsconfig.json
 ```
 
-- `commands.ts`: Custom Cypress commands, including the AI-powered selector generator.
-- `prompt.md`: The base prompt for the LLM, with clear instructions and selector priorities.
-- `history.json`: Stores previous selector generations for RAG.
-- `test.cy.ts`: Example E2E tests using the new `getByAi` command.
+- `commands.ts` : Commandes Cypress personnalisées, dont le générateur de sélecteurs piloté par l'IA.
+- `prompt.md` : Le prompt de base pour le LLM, avec des instructions claires et des priorités de sélecteurs.
+- `history.json` : Stocke les générations de sélecteurs précédentes pour le RAG.
+- `test.cy.ts` : Exemples de tests E2E utilisant la nouvelle commande `getByAi`.
 
-## How the RAG Process Works
+## Comment fonctionne le processus RAG
 
-The workflow is simple and powerful:
+Le flux est simple et puissant :
 
-1. **Describe the Element**: In your test, use `cy.getByAi("Username field")`.
-2. **DOM Extraction**: Cypress grabs the current DOM.
-3. **Prompt Construction**: The DOM and your description are sent to Ollama, using a carefully crafted prompt.
-4. **LLM Selector Generation**: Ollama returns the best selector, following your priorities (e.g., `data-testid`, `id`, accessibility).
-5. **Selector Usage**: Cypress uses the selector to interact with the element.
-6. **History & RAG**: Each interaction is logged. If the same description is used again, the system can reuse or refine previous selectors.
+1. **Décrivez l'élément** : Dans votre test, utilisez `cy.getByAi("Champ nom d'utilisateur")`.
+2. **Extraction du DOM** : Cypress capture le DOM courant.
+3. **Construction du prompt** : Le DOM et votre description sont envoyés à Ollama via un prompt soigneusement rédigé.
+4. **Génération du sélecteur par le LLM** : Ollama retourne le meilleur sélecteur selon vos priorités (par exemple : `data-testid`, `id`, accessibilité).
+5. **Utilisation du sélecteur** : Cypress utilise le sélecteur pour interagir avec l'élément.
+6. **Historique et RAG** : Chaque interaction est enregistrée. Si la même description est réutilisée, le système peut réemployer ou affiner les sélecteurs précédents.
 
-This approach makes your tests more robust and easier to maintain, even as your UI evolves.
+Cette approche rend vos tests plus robustes et plus faciles à maintenir, même lorsque votre interface évolue.
 
-## Technical Deep Dive
+## Plongée technique
 
-### The Prompt
+### Le Prompt
 
-The prompt (`prompt.md`) guides the LLM to generate robust selectors:
+Le prompt (`prompt.md`) guide le LLM pour générer des sélecteurs robustes :
 
-- Prefer `data-testid` attributes
-- Avoid fragile selectors
-- Use accessibility attributes when possible
+- Préférer les attributs `data-testid`
+- Éviter les sélecteurs fragiles
+- Utiliser les attributs d'accessibilité lorsque c'est possible
 
-### The Custom Command
+### La Commande Personnalisée
 
-In `commands.ts`, the `getByAi` command orchestrates the process:
+Dans `commands.ts`, la commande `getByAi` orchestre le processus :
 
 ```typescript
 cy.getByAi("Username field").type("admin")
 ```
 
-It checks the history for previous selectors. If not found, it sends the DOM and description to Ollama. The LLM returns a selector, which is then used by Cypress.
+Elle vérifie l'historique pour d'éventuels sélecteurs précédents. Si aucun n'est trouvé, elle envoie le DOM et la description à Ollama. Le LLM retourne un sélecteur, qui est ensuite utilisé par Cypress.
 
-## Example Test
+## Exemple de Test
 
 ```typescript
 it('good creds', () => {
@@ -90,27 +90,27 @@ it('good creds', () => {
 })
 ```
 
-## Ollama Integration
+## Intégration avec Ollama
 
-Ollama runs locally and exposes an API. The Cypress command sends a POST request with the prompt and receives a selector in response.
+Ollama tourne en local et expose une API. La commande Cypress envoie une requête POST avec le prompt et reçoit un sélecteur en réponse.
 
 ```typescript
 cy.request("POST", "http://localhost:11434/api/generate", { /* ... */ })
 ```
 
-## Benefits and Takeaways
+## Avantages et enseignements
 
-- **Less Brittle Tests**: No more chasing broken selectors after every UI change.
-- **Faster Test Writing**: Just describe the element, and let the AI do the rest.
-- **Private and Fast**: Ollama runs locally, so your data stays safe and the feedback loop is quick.
-- **History and RAG**: The system learns from previous runs, making selector generation smarter over time.
+- **Des tests moins fragiles** : Fini de courir après les sélecteurs cassés à chaque changement d'UI.
+- **Rédaction de tests plus rapide** : Décrivez simplement l'élément et laissez l'IA faire le reste.
+- **Confidentialité et rapidité** : Ollama tourne en local, vos données restent protégées et la boucle de retour est immédiate.
+- **Historique et RAG** : Le système apprend des exécutions précédentes, rendant la génération de sélecteurs de plus en plus intelligente.
 
-LLMs and tools like Ollama are game changers for test automation. They bring intelligence and adaptability to your test suites, letting you focus on what matters: delivering quality software.
+Les LLMs et des outils comme Ollama changent la donne pour l'automatisation des tests. Ils apportent intelligence et adaptabilité à vos suites de tests, vous permettant de vous concentrer sur l'essentiel : livrer des logiciels de qualité.
 
 ## Conclusion
 
-If you're tired of brittle selectors and want to supercharge your Cypress tests, give this RAG + Ollama approach a try! The future of test automation is here — and it's powered by AI.
+Si vous en avez assez des sélecteurs fragiles et que vous souhaitez booster vos tests Cypress, essayez cette approche RAG + Ollama ! Le futur de l'automatisation des tests est là — et il est propulsé par l'IA.
 
-Take a look at the public project on my GitHub: [adrianpothuaud/cypress-rag](https://github.com/adrianpothuaud/cypress-rag) 🤖 AI-powered element selection for Cypress using natural language descriptions.
+Découvrez le projet public sur mon GitHub : [adrianpothuaud/cypress-rag](https://github.com/adrianpothuaud/cypress-rag) 🤖 Sélection d'éléments par IA pour Cypress, en langage naturel.
 
-Happy testing! If you have questions or want to see more, feel free to reach out!
+Bon testing ! Si vous avez des questions ou souhaitez en savoir plus, n'hésitez pas à me contacter !

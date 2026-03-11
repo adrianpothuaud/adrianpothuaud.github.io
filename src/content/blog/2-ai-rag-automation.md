@@ -8,28 +8,28 @@ tags: ["AI", "LLM", "RAG", "Test Automation", "WebdriverIO"]
 mediumUrl: "https://medium.com/javascript-in-plain-english/a-real-ai-application-for-automation-testing"
 ---
 
-🖖 Hi! I am Adrian, Software Engineer in Software Quality, Test and Automation.
+🖖 Salut ! Je m'appelle Adrian, ingénieur logiciel spécialisé en qualité, test et automatisation.
 
-🤔 I've been looking around for concrete AI applications in automation testing for a while but always feels mystified by a bunch of articles claiming that AI is the future of automation testing; except they never provide concrete examples or applications!
+🤔 Depuis un moment, je cherche des applications concrètes de l'IA dans l'automatisation des tests — mais je reste toujours sur ma faim face à une avalanche d'articles qui proclament que l'IA est l'avenir du testing, sans jamais fournir d'exemples ou d'applications concrets !
 
-🕵️‍♀️ I worked for many companies and solved QA challenges from scratch in 2 of them as a First QA Lead. I feel like one of the most common issues in test automation is the stability of selectors that may change due to software updates, or flaky selectors.
+🕵️‍♀️ J'ai travaillé pour de nombreuses entreprises et j'ai résolu des défis QA de zéro dans deux d'entre elles en tant que premier QA Lead. L'un des problèmes les plus récurrents que j'ai rencontrés en automatisation de tests, c'est la stabilité des sélecteurs, qui peuvent changer suite à des mises à jour logicielles ou se révéler simplement peu fiables.
 
-⏯️ I played around with ChatGPT as everyone in the world, then Gemini and Claude and others… But I was always looking to define good prompts and ask things to improve my testing processes and automation setup or strategies. Nothing really exceptional came out until I really worked on a sustainable solution to apply AI through LLM prompt and RAG this week as a Proof Of Concept for my current job.
+⏯️ Comme tout le monde, j'ai joué avec ChatGPT, puis Gemini, Claude et d'autres… Mais je cherchais toujours à définir de bonnes invites pour améliorer mes processus de test, mes configurations d'automatisation ou mes stratégies. Rien de vraiment exceptionnel n'en est sorti… jusqu'à ce que je travaille vraiment cette semaine sur une solution pérenne alliant LLM et RAG, en tant que Proof of Concept pour mon poste actuel.
 
-👀 One day I found this very interesting project enabling Playwright users to define selectors neither by xpath, nor ids; but by just describing an element in your words. The project will then call a mysterious ChatGPT function and return a valid element! Magic isn't it? But it is not enough alone to stabilise your tests. https://github.com/zerostep-ai/zerostep
+👀 Un jour, j'ai découvert ce projet très intéressant permettant aux utilisateurs de Playwright de définir des sélecteurs, ni par xpath, ni par id, mais simplement en décrivant un élément avec ses propres mots. Le projet appelle alors mystérieusement une fonction ChatGPT et retourne un élément valide ! Magique, non ? Mais ce n'est pas suffisant à lui seul pour stabiliser vos tests. https://github.com/zerostep-ai/zerostep
 
-💡 The idea is to use and drive any LLM with a bit of context in order to:
+💡 L'idée est d'utiliser et de piloter n'importe quel LLM avec un peu de contexte afin de :
 
-- 📸 **Analyse a web page or mobile screen**: you need a model that is capable of analysing images like gemini flash versions or chat gpt vision
-- 🏄‍♂️ **Scrap the web** with references to your automation framework (example: Webdriver.IO but it could work with anything else in any programming language)
-- 🧠 **Develop smart functions** in your code that will, first try to find an earlier working selector, then if element not found, call the LLM for a new selector, then evaluate element existence, etc…
-- 💿 **Implement a storage system** for all the selectors generated to be able to reuse them while they are working
+- 📸 **Analyser une page web ou un écran mobile** : vous avez besoin d'un modèle capable d'analyser des images, comme les versions flash de Gemini ou ChatGPT Vision
+- 🏄‍♂️ **Scraper le web** avec des références à votre framework d'automatisation (exemple : Webdriver.IO, mais ça pourrait fonctionner avec n'importe quoi, dans n'importe quel langage de programmation)
+- 🧠 **Développer des fonctions intelligentes** dans votre code qui tenteront d'abord de trouver un sélecteur ayant fonctionné précédemment, puis, si l'élément n'est pas trouvé, appelleront le LLM pour en obtenir un nouveau, vérifieront l'existence de l'élément, etc.
+- 💿 **Implémenter un système de stockage** pour tous les sélecteurs générés, afin de les réutiliser tant qu'ils fonctionnent
 
-🔮 Once we are able to achieve this, a world of stability and peace will open for all of us as automation testers and enable a lot of new possibilities having more time to focus on other quality and testing topics!
+🔮 Une fois que nous parvenons à réaliser tout cela, un monde de stabilité et de sérénité s'ouvre à nous en tant que testeurs automaticiens, et de nombreuses nouvelles possibilités émergent pour se concentrer davantage sur d'autres sujets liés à la qualité et au testing !
 
-## Step 1: Storage system
+## Étape 1 : Système de stockage
 
-Using any method, database, cache or file storage, implement something that stores data about your selectors as an example below:
+Quelle que soit la méthode choisie — base de données, cache ou stockage de fichiers — implémentez quelque chose qui stocke les données de vos sélecteurs, comme dans l'exemple ci-dessous :
 
 ```json
 [
@@ -54,14 +54,14 @@ Using any method, database, cache or file storage, implement something that stor
 ]
 ```
 
-## Step 2: Screenshots and content scanning
+## Étape 2 : Captures d'écran et analyse de contenu
 
-Implement your own methods so you are able to capture your screen as:
+Implémentez vos propres méthodes pour capturer votre écran sous forme de :
 
-- images (screenshots)
-- DOM-like architecture in text (example: XML iOS screen scan)
+- images (captures d'écran)
+- architecture DOM en texte (exemple : scan d'écran iOS en XML)
 
-My examples with webdriver.io and TypeScript below but once again feel free to implement it the way you want:
+Mes exemples avec webdriver.io et TypeScript ci-dessous, mais une fois encore, sentez-vous libre de l'implémenter à votre façon :
 
 ```typescript
 export const captureCurrentScreen = async (
@@ -96,9 +96,9 @@ export const scanCurrentScreen = async (
 };
 ```
 
-## Step 3: Robust prompt(s)
+## Étape 3 : Des prompts robustes
 
-Nothing is better than an example:
+Rien de tel qu'un exemple concret :
 
 ```markdown
 # Searching for the best Mobile selector for Webdriver.IO using RAG
@@ -131,9 +131,9 @@ Please read carefully below information and instructions to perform RAG of a goo
 - Give the output as a string without any extra formatting
 ```
 
-## Step 4: Plug everything together and call an LLM
+## Étape 4 : Assembler les pièces et appeler un LLM
 
-Below is my example implemented with webdriver.io and TypeScript:
+Voici mon exemple implémenté avec webdriver.io et TypeScript :
 
 ```typescript
 export const findByRAG = async (input: {
@@ -192,15 +192,15 @@ export const findByRAG = async (input: {
 };
 ```
 
-## Final: try and improve
+## Pour finir : essayez et améliorez
 
-Also if you tried this I invite you to consider the following steps yourself as improvements:
+Si vous avez essayé cette approche, je vous invite à envisager les améliorations suivantes :
 
-- Make it yours and adapt to your needs/framework/habits
-- Fine-tune a model for this specific task
-- Implement smart functions like "wait for condition" using RAG
-- Discuss and enrich this topic all around in real life and on the web so AI becomes a real booster in test automation and not another obscure topic that promises stuff without real examples
+- Adaptez-la à vos besoins, votre framework et vos habitudes
+- Affinez un modèle pour cette tâche spécifique
+- Implémentez des fonctions intelligentes comme « attendre une condition » via le RAG
+- Discutez et enrichissez ce sujet dans votre entourage et sur le web, pour que l'IA devienne un vrai booster en automatisation de tests et non un sujet obscur qui promet sans jamais délivrer
 
-As a next step in my very heavy backlog of side projects, I will try to develop and maintain a webdriver.io utility to make this work for any project for web or mobile automation — let me know in the comments if you could be interested and I will send you some updates!
+Comme prochaine étape dans mon backlog interminable de projets personnels, je vais tenter de développer et de maintenir un utilitaire webdriver.io pour rendre tout cela accessible à n'importe quel projet web ou mobile — faites-moi savoir dans les commentaires si cela vous intéresse et je vous tiendrai informé !
 
-Thank you very much for reaching the end of this article! If you like it, please send clap/comments 🙏.
+Merci infiniment d'avoir lu jusqu'au bout ! Si l'article vous a plu, n'hésitez pas à laisser des applaudissements et des commentaires 🙏.
