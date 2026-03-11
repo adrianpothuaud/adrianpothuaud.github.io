@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Terminal, ShieldCheck, Zap, Code2 } from 'lucide-react';
+import { Terminal, ShieldCheck, Zap, Code2, Smartphone } from 'lucide-react';
 import StorySlider from './StorySlider';
 import OpenToWorkBadge from './OpenToWorkBadge';
 import { APP_CONFIG } from '../config';
@@ -30,7 +30,7 @@ const Hero = () => {
                         ) : (
                             <div style={{ display: 'inline-block', padding: '0.5rem 1rem', background: 'var(--color-bg-surface)', borderRadius: 'var(--radius-full)', border: '1px solid rgba(0,0,0,0.1)' }}>
                                 <span style={{ color: 'var(--color-accent-blue)', fontWeight: 600, fontSize: '0.9rem' }}>
-                                    Expert QA & Automatisation
+                                    Senior QA Engineer & Formateur · 10 ans XP
                                 </span>
                             </div>
                         )}
@@ -42,8 +42,8 @@ const Hero = () => {
                     </h1>
 
                     <p style={{ fontSize: '1.15rem', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-xl)', lineHeight: 1.6 }}>
-                        L'automatisation des tests n'est pas qu'un processus technique : c'est <b>le bouclier qui garantit une expérience utilisateur fluide.</b><br /><br />
-                        Grâce à mes formations en entreprise et mon expertise sur Playwright, Cypress et WDIO, vos équipes apprendront à sécuriser drastiquement vos déploiements.
+                        <b>10 ans d'expérience</b> en tant que QA Lead dans des startups et scale-ups (Paymium, happn, October, Trusk…).<br /><br />
+                        J'interviens en entreprise pour former vos équipes sur <b>Playwright, Cypress, WebdriverIO</b> et vous aider à construire une stratégie de test solide — en intégrant les apports de l'IA pour des tests encore plus stables.
                     </p>
 
                     <div style={{ display: 'flex', gap: '1rem' }}>
@@ -92,7 +92,8 @@ const Hero = () => {
                     { icon: Terminal, name: 'Cypress' },
                     { icon: ShieldCheck, name: 'Playwright' },
                     { icon: Code2, name: 'Selenium' },
-                    { icon: Zap, name: 'WebdriverIO' }
+                    { icon: Zap, name: 'WebdriverIO' },
+                    { icon: Smartphone, name: 'Appium' }
                 ].map((tech, idx) => (
                     <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-text-secondary)' }}>
                         <tech.icon size={24} />
