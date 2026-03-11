@@ -37,7 +37,7 @@ const StorySlider = () => {
                         style={{ padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', justifyContent: 'center' }}
                     >
                         <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem', textAlign: 'center' }}>L'évolution du Numérique</h3>
-                        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', width: '100%', height: '220px' }}>
+                        <div className="story-slider-images">
                             <div style={{ flex: 1, position: 'relative', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)' }}>
                                 <img src="/images/vintage.png" alt="1990s Web" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                 <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0,0,0,0.7)', color: '#fff', fontSize: '0.8rem', padding: '4px', textAlign: 'center', fontWeight: 'bold' }}>Hier</div>

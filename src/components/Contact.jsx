@@ -20,7 +20,7 @@ const Contact = () => {
     return (
         <section id="contact" style={{ padding: 'var(--space-2xl) 0' }}>
             <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
-                <h2 style={{ fontSize: '2.5rem' }}>Prêt à <span className="text-gradient">accélérer</span> ?</h2>
+                <h2 style={{ fontSize: 'clamp(2rem, 5vw, 2.5rem)' }}>Prêt à <span className="text-gradient">accélérer</span> ?</h2>
                 <p style={{ color: 'var(--color-text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
                     Discutons de vos besoins en formation pour vos équipes QA et développement.
                 </p>

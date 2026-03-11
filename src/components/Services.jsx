@@ -22,7 +22,7 @@ const Services = () => {
     return (
         <section id="services" style={{ padding: 'var(--space-2xl) 0' }}>
             <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
-                <h2 style={{ fontSize: '2.5rem' }}>Mes Formations & Expertise</h2>
+                <h2 style={{ fontSize: 'clamp(2rem, 5vw, 2.5rem)' }}>Mes Formations & Expertise</h2>
                 <p style={{ color: 'var(--color-text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
                     J'interviens dans votre entreprise pour monter en compétence vos équipes QA et développeurs sur les meilleurs outils du marché.
                 </p>

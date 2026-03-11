@@ -65,7 +65,7 @@ const BlogPost = () => {
             </Link>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                <h1 style={{ fontSize: '3rem', lineHeight: 1.2, marginBottom: '1.5rem', color: 'var(--color-text-primary)' }}>
+                <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', lineHeight: 1.2, marginBottom: '1.5rem', color: 'var(--color-text-primary)' }}>
                     {post.title}
                 </h1>
 

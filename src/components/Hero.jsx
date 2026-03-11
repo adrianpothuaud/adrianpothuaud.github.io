@@ -36,7 +36,7 @@ const Hero = () => {
                         )}
                     </div>
 
-                    <h1 style={{ fontSize: '3.5rem', marginBottom: 'var(--space-md)', lineHeight: 1.1 }}>
+                    <h1 style={{ fontSize: 'clamp(2.2rem, 6vw, 3.5rem)', marginBottom: 'var(--space-md)', lineHeight: 1.1 }}>
                         Crashes, bugs, régressions : <br />
                         <span className="text-gradient">Stoppez l'hémorragie.</span>
                     </h1>

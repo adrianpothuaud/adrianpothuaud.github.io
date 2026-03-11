@@ -31,8 +31,8 @@
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 4rem;
+  --space-xl: clamp(1.5rem, 4vw, 2rem);
+  --space-2xl: clamp(2.5rem, 8vw, 4rem);
 
   /* Border Radius */
   --radius-sm: 0.5rem;

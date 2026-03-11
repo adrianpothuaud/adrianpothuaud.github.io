@@ -63,17 +63,17 @@ const IntroSequence = ({ onComplete }) => {
                     >
                         <motion.h2
                             initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
-                            style={{ fontSize: '2.5rem', marginBottom: '4rem', fontWeight: 300, color: 'var(--color-text-primary)' }}
+                            style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', marginBottom: '4rem', fontWeight: 300, color: 'var(--color-text-primary)' }}
                         >
                             Notre monde évolue <span className="text-gradient" style={{ fontWeight: 600 }}>à toute vitesse</span>.
                         </motion.h2>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '3rem', width: '100%' }}>
+                        <div className="intro-evolution-grid">
 
                             {/* Hier */}
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.8 }}
-                                style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)', height: '280px', boxShadow: 'var(--shadow-md)' }}
+                                className="intro-evolution-item"
                             >
                                 <div style={{ position: 'absolute', top: '10px', left: '10px', background: 'rgba(0,0,0,0.8)', padding: '4px 12px', color: '#fff', fontWeight: 'bold', fontSize: '1rem', borderRadius: '4px', zIndex: 10 }}>
                                     HIER
@@ -84,7 +84,7 @@ const IntroSequence = ({ onComplete }) => {
                             {/* Aujourd'hui */}
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5, duration: 0.8 }}
-                                style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)', height: '280px', boxShadow: 'var(--shadow-md)' }}
+                                className="intro-evolution-item"
                             >
                                 <div style={{ position: 'absolute', top: '10px', left: '10px', background: 'var(--color-accent-blue)', padding: '4px 12px', color: '#fff', fontWeight: 'bold', fontSize: '1rem', borderRadius: '4px', zIndex: 10 }}>
                                     AUJOURD'HUI
@@ -95,7 +95,7 @@ const IntroSequence = ({ onComplete }) => {
                             {/* Demain */}
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.5, duration: 0.8 }}
-                                style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)', height: '280px', boxShadow: 'var(--shadow-md)' }}
+                                className="intro-evolution-item"
                             >
                                 <div style={{ position: 'absolute', top: '10px', left: '10px', background: 'var(--color-accent-purple)', padding: '4px 12px', color: '#fff', fontWeight: 'bold', fontSize: '1rem', borderRadius: '4px', zIndex: 10 }}>
                                     DEMAIN
@@ -111,7 +111,7 @@ const IntroSequence = ({ onComplete }) => {
                     <motion.div key="crash" variants={wrapVariant} initial="initial" animate="animate" exit="exit" style={{ width: '100%', maxWidth: '700px' }}>
                         <motion.h2
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}
-                            style={{ fontSize: '2.2rem', fontWeight: 600, color: 'var(--color-accent-red)', marginBottom: '3rem' }}
+                            style={{ fontSize: 'clamp(1.5rem, 5vw, 2.2rem)', fontWeight: 600, color: 'var(--color-accent-red)', marginBottom: '3rem' }}
                         >
                             Mais que se passe-t-il quand on précipite tout ?
                         </motion.h2>
@@ -214,7 +214,7 @@ const IntroSequence = ({ onComplete }) => {
                         animate={{ opacity: 1, scale: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }}
                         exit="exit"
                     >
-                        <h2 style={{ fontSize: '2.5rem', fontWeight: 400, lineHeight: 1.4, color: 'var(--color-text-secondary)' }}>
+                        <h2 style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', fontWeight: 400, lineHeight: 1.4, color: 'var(--color-text-secondary)' }}>
                             La Qualité Logicielle n'est pas une option.
                             <br />
                             <motion.span
@@ -222,7 +222,7 @@ const IntroSequence = ({ onComplete }) => {
                                 animate={{ filter: 'brightness(1.2)' }}
                                 transition={{ delay: 1, duration: 1.5 }}
                                 className="text-gradient"
-                                style={{ fontWeight: 800, fontSize: '4rem', display: 'block', marginTop: '1.5rem', lineHeight: 1.1 }}
+                                style={{ fontWeight: 800, fontSize: 'clamp(2.5rem, 8vw, 4rem)', display: 'block', marginTop: '1.5rem', lineHeight: 1.1 }}
                             >
                                 C'est un investissement<br />vital.
                             </motion.span>
