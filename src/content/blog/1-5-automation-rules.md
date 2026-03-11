@@ -8,24 +8,78 @@ tags: ["Test Automation", "Best Practices", "Strategy"]
 mediumUrl: "https://medium.com/@adrianpothuaud/5-essential-test-automation-rules-for-a-reliable-and-scalable-testing-strategy"
 ---
 
-L'automatisation des tests peut changer la donne pour vos projets logiciels — mais seulement si elle est bien faite. Voici cinq règles pour vous mettre sur la voie du succès.
+Test automation can be a game-changer for software projects, but only if done right. Too often, teams either overcomplicate it or avoid it altogether. To help you navigate the pitfalls and get the most out of test automation, here are five rules that can set you up for success.
 
-## Règle n°1 : Commencez maintenant
+## #1: Just Start Doing It
 
-La plus grande erreur en automatisation ? Trop réfléchir. Commencez petit : automatisez les tests de régression de base ou les flux utilisateurs critiques. Apprenez de vos échecs, itérez et améliorez. Plus tôt vous commencez, plus vite vous construisez expertise et confiance.
+The biggest mistake you can make with test automation? Overthinking it. Just start.
 
-## Règle n°2 : N'automatisez pas tout
+Too many teams spend months trying to define the "perfect" automation strategy or toolset. They get stuck in research mode, afraid to take action. But automation is something you learn by doing. You'll write some bad tests. Some will be flaky. Some will be pointless. That's part of the process.
 
-Certaines choses ne devraient pas être automatisées. Évitez les fonctionnalités encore instables, les interfaces qui changent constamment ou les scénarios trop complexes à mettre en place. Concentrez-vous sur ce qui apporte de la valeur : les parcours utilisateurs principaux, les tests de régression répétitifs, les APIs (généralement plus stables que l'UI).
+Start small. Automate basic regression tests or critical user flows first. Learn from failures, iterate, and improve. The sooner you start, the sooner you'll build expertise and confidence.
 
-## Règle n°3 : Ne supprimez jamais un test
+## #2: Do Not Try to Automate Everything
 
-Chaque test contribue à votre couverture fonctionnelle. Si un test commence à échouer, demandez-vous pourquoi. Si la fonctionnalité est dépréciée, supprimez-le. Sinon, refactorisez le test défaillant ou marquez-le comme "skipped" le temps de le corriger.
+Not everything is worth automating. Some things shouldn't be automated at all.
 
-## Règle n°4 : Stabilisez vos sélecteurs
+Examples of bad automation candidates:
 
-L'instabilité des tests UI provient souvent de sélecteurs fragiles. Utilisez des attributs dédiés aux tests (`data-testid`), évitez les XPath basés sur la structure du DOM, et explorez des solutions comme le RAG avec des LLMs pour des sélecteurs auto-résilients.
+- Features that are still unstable or frequently changing (your test maintenance effort will be painful).
+- UI elements with constantly shifting designs (you'll chase moving selectors all day).
+- Extremely complex scenarios that require too much test setup.
 
-## Règle n°5 : Intégrez dans votre CI/CD
+Instead, focus on tests that provide real value:
 
-Un test qui ne tourne pas automatiquement n'existe pas. Intégrez vos suites de tests dans votre pipeline CI/CD dès le premier jour. GitHub Actions, GitLab CI, ou n'importe quel outil — l'essentiel est que chaque commit déclenche vos tests.
+- Core user journeys (login, checkout, key workflows).
+- Repetitive regression tests that run often.
+- APIs and backend logic (they're usually more stable than UI tests).
+
+Be smart about where you invest your automation efforts.
+
+## #3: Never Delete a Test
+
+Every test you write contributes to your functional coverage. If a test starts failing, don't just delete it — ask why.
+
+If the feature is deprecated, sure, remove the test. But if it's failing due to a real issue, it's an opportunity to improve your app.
+
+Good tests act as safety nets, catching regressions early. Even old tests might surface unexpected bugs in the future. Instead of deleting them, consider:
+
+- Refactoring flaky tests.
+- Marking some as "skipped" until they can be fixed.
+- Moving lower-priority tests to a separate suite that runs less frequently.
+
+Your tests are valuable assets. Treat them like it.
+
+## #4: Stabilize Your Selectors
+
+UI test flakiness is often caused by unstable element selectors. If your tests constantly break because elements can't be found, you're doing it wrong.
+
+Here's what you should do:
+
+- Avoid using CSS classes unless they are specifically meant for testing (framework-generated class names often change).
+- Prefer unique IDs for elements whenever possible.
+- Use accessibility-driven selectors (aria-labels, role attributes, etc.).
+- In modern front-end apps (React, Angular, Vue), talk to your dev team about adding `data-test` attributes for reliable selectors.
+
+Good selectors = stable tests. Stable tests = less maintenance hassle.
+
+## #5: Keep It Simple
+
+Test automation is supposed to make your life easier, not harder. Avoid overengineering.
+
+A common mistake is trying to build a massive automation framework with all the bells and whistles — custom reporting, CI/CD integrations, complex test data management — before you even have solid basic tests.
+
+Instead, follow these guidelines:
+
+- Start with simple, readable test cases.
+- Use existing tools and libraries instead of reinventing the wheel.
+- Keep your test code modular and maintainable (use page objects, helper functions, etc.).
+- Make sure running tests is easy — one command should execute them all.
+
+The simpler your setup, the easier it will be to scale automation across your team.
+
+---
+
+Test automation isn't about perfection — it's about consistency and improvement. By following these five rules, you'll build an automation strategy that is practical, reliable, and beneficial for your project.
+
+Now go write some tests! 🚀
