@@ -11,6 +11,10 @@ import BlogPost from './pages/BlogPost';
 
 function App() {
   const [showIntro, setShowIntro] = useState(() => {
+    // Detecter les robots d'indexation (SEO)
+    const isBot = /bot|googlebot|crawler|spider|robot|crawling|lighthouse/i.test(navigator.userAgent);
+    if (isBot) return false;
+
     // Si l'utilisateur est déjà venu, on ne montre plus l'intro
     return localStorage.getItem('introSeen') !== 'true';
   });

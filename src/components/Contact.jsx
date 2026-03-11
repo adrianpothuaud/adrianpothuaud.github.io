@@ -39,26 +39,12 @@ const Contact = () => {
                     <div>
                         <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Informations</h3>
 
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', color: 'var(--color-text-secondary)' }}>
-                            <div style={{ padding: '10px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '50%', color: 'var(--color-accent-blue)' }}>
-                                <Mail size={20} />
-                            </div>
-                            <a href="mailto:contact@adrianpothuaud.fr" style={{ fontSize: '1rem' }}>contact@adrianpothuaud.fr</a>
-                        </div>
-
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--color-text-secondary)' }}>
                             <div style={{ padding: '10px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '50%', color: 'var(--color-accent-blue)' }}>
                                 <MapPin size={20} />
                             </div>
                             <span style={{ fontSize: '1rem' }}>Indépendant / Remote France</span>
                         </div>
-                    </div>
-
-                    <div style={{ marginTop: 'auto', padding: '1rem', background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: 'var(--radius-md)' }}>
-                        <p style={{ color: 'var(--color-accent-green)', fontSize: '0.9rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                            <span style={{ display: 'inline-block', width: '8px', height: '8px', background: 'var(--color-accent-green)', borderRadius: '50%' }}></span>
-                            Disponible pour de nouvelles missions
-                        </p>
                     </div>
                 </motion.div>
 
@@ -80,7 +66,7 @@ const Contact = () => {
                                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                                     style={{
                                         padding: '1rem',
-                                        background: 'rgba(0,0,0,0.3)',
+                                        background: 'rgba(0,0,0,0.1)',
                                         border: '1px solid rgba(255,255,255,0.1)',
                                         borderRadius: 'var(--radius-md)',
                                         color: '#fff',
@@ -102,7 +88,7 @@ const Contact = () => {
                                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                                     style={{
                                         padding: '1rem',
-                                        background: 'rgba(0,0,0,0.3)',
+                                        background: 'rgba(0,0,0,0.1)',
                                         border: '1px solid rgba(255,255,255,0.1)',
                                         borderRadius: 'var(--radius-md)',
                                         color: '#fff',
@@ -126,7 +112,7 @@ const Contact = () => {
                                 onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                                 style={{
                                     padding: '1rem',
-                                    background: 'rgba(0,0,0,0.3)',
+                                    background: 'rgba(0,0,0,0.1)',
                                     border: '1px solid rgba(255,255,255,0.1)',
                                     borderRadius: 'var(--radius-md)',
                                     color: '#fff',
