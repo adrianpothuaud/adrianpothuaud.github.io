@@ -9,10 +9,8 @@ const ExperienceTimeline = () => {
 
     useEffect(() => {
         const fetchContent = async () => {
-            // Import all markdown files in the experience directory
             const globResult = import.meta.glob('../content/experience/*.md', { query: '?raw', import: 'default' });
             const posts = await loadMarkdownContent(globResult);
-            // Sort by order
             setExperiences(posts.sort((a, b) => a.order - b.order));
             setLoading(false);
         };
@@ -23,36 +21,32 @@ const ExperienceTimeline = () => {
 
     return (
         <section id="experience" style={{ padding: 'var(--space-2xl) 0', position: 'relative' }}>
-            <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
-                <h2 style={{ fontSize: '2.5rem' }}>Mon Parcours</h2>
+            <div className="section-header">
+                <span className="section-label">Parcours</span>
+                <h2>Mon expérience</h2>
             </div>
 
-            <div style={{ maxWidth: '800px', margin: '0 auto', position: 'relative' }}>
-                {/* Ligne verticale de la timeline */}
-                <div style={{ position: 'absolute', left: '24px', top: '10px', bottom: '10px', width: '2px', background: 'rgba(0,0,0,0.1)' }}></div>
+            <div className="timeline-wrapper">
+                <div className="timeline-line" />
 
                 {experiences.map((exp, idx) => (
                     <motion.div
                         key={idx}
+                        className="timeline-item"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.5, delay: idx * 0.2 }}
-                        style={{ position: 'relative', paddingLeft: '60px', marginBottom: '3rem' }}
+                        viewport={{ once: true, margin: '-80px' }}
+                        transition={{ duration: 0.45, delay: idx * 0.1 }}
                     >
-                        {/* Point sur la timeline */}
-                        <div style={{
-                            position: 'absolute', left: '16px', top: '6px', width: '18px', height: '18px',
-                            borderRadius: '50%', background: 'var(--color-bg-base)', border: '4px solid var(--color-accent-blue)'
-                        }}></div>
+                        <div className="timeline-dot" />
 
-                        <div className="glass-panel" style={{ padding: '1.5rem 2rem' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                                <h3 style={{ fontSize: '1.25rem', color: 'var(--color-text-primary)' }}>{exp.role}</h3>
-                                <span style={{ fontSize: '0.9rem', color: 'var(--color-accent-purple)', fontWeight: 500 }}>{exp.period}</span>
+                        <div className="glass-panel" style={{ padding: '1.5rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.25rem' }}>
+                                <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', marginBottom: 0 }}>{exp.role}</h3>
+                                <span style={{ fontSize: '0.8rem', color: 'var(--color-accent-purple)', fontWeight: 500, background: 'var(--color-accent-purple-light)', padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap' }}>{exp.period}</span>
                             </div>
-                            <h4 style={{ fontSize: '1rem', color: 'var(--color-text-secondary)', marginBottom: '1rem', fontWeight: 400 }}>{exp.company}</h4>
-                            <div style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }} className="markdown-content">
+                            <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', marginBottom: '0.75rem', fontWeight: 500 }}>{exp.company}</p>
+                            <div style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem' }} className="markdown-content">
                                 <ReactMarkdown>{exp.content}</ReactMarkdown>
                             </div>
                         </div>

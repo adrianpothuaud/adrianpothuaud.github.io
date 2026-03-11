@@ -9,7 +9,6 @@ const Contact = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Simulate form submission
         setTimeout(() => {
             alert("Ce formulaire est une démonstration pour le moment.");
             setIsSubmitting(false);
@@ -17,153 +16,150 @@ const Contact = () => {
         }, 1500);
     };
 
+    const inputStyle = {
+        width: '100%',
+        padding: '0.875rem 1rem',
+        background: '#ffffff',
+        border: '1.5px solid var(--color-border)',
+        borderRadius: 'var(--radius-md)',
+        color: 'var(--color-text-primary)',
+        fontFamily: 'inherit',
+        fontSize: '0.95rem',
+        outline: 'none',
+        transition: 'border-color var(--transition-fast), box-shadow var(--transition-fast)',
+    };
+
+    const handleFocus = (e) => {
+        e.target.style.borderColor = 'var(--color-accent-blue)';
+        e.target.style.boxShadow = '0 0 0 3px rgba(37, 99, 235, 0.1)';
+    };
+
+    const handleBlur = (e) => {
+        e.target.style.borderColor = 'var(--color-border)';
+        e.target.style.boxShadow = 'none';
+    };
+
     return (
         <section id="contact" style={{ padding: 'var(--space-2xl) 0' }}>
-            <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
-                <h2 style={{ fontSize: 'clamp(2rem, 5vw, 2.5rem)' }}>Prêt à <span className="text-gradient">accélérer</span> ?</h2>
-                <p style={{ color: 'var(--color-text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
-                    Discutons de vos besoins en formation pour vos équipes QA et développement.
-                </p>
+            <div className="section-header">
+                <span className="section-label">Contact</span>
+                <h2>Prêt à <span className="text-gradient">accélérer</span> ?</h2>
+                <p>Discutons de vos besoins en formation pour vos équipes QA et développement.</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 2fr', gap: '3rem', maxWidth: '1000px', margin: '0 auto' }}>
-
+            <div className="contact-grid">
                 {/* Contact Info */}
                 <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="glass-panel"
-                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}
+                    style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
                 >
-                    <div>
-                        <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Informations</h3>
+                    <h3 style={{ fontSize: '1.1rem', marginBottom: '0.25rem' }}>Informations</h3>
 
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--color-text-secondary)' }}>
-                            <div style={{ padding: '10px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '50%', color: 'var(--color-accent-blue)' }}>
-                                <MapPin size={20} />
-                            </div>
-                            <span style={{ fontSize: '1rem' }}>Paris, Île-de-France · Remote France</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
+                        <div style={{ padding: '8px', background: 'var(--color-accent-blue-light)', borderRadius: '8px', color: 'var(--color-accent-blue)', flexShrink: 0 }}>
+                            <MapPin size={18} />
                         </div>
-
-                        <a href="https://www.linkedin.com/in/adrianpothuaud/" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--color-text-secondary)', textDecoration: 'none' }}>
-                            <div style={{ padding: '10px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '50%', color: 'var(--color-accent-blue)', flexShrink: 0 }}>
-                                <Linkedin size={20} />
-                            </div>
-                            <span style={{ fontSize: '1rem' }}>LinkedIn : Adrian Pothuaud</span>
-                        </a>
-
-                        <a href="https://medium.com/@adrianpothuaud" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--color-text-secondary)', textDecoration: 'none' }}>
-                            <div style={{ padding: '10px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '50%', color: 'var(--color-accent-blue)', flexShrink: 0 }}>
-                                <BookOpen size={20} />
-                            </div>
-                            <span style={{ fontSize: '1rem' }}>Medium : @adrianpothuaud</span>
-                        </a>
+                        <span style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>Paris, Île-de-France · Remote France</span>
                     </div>
+
+                    <a href="https://www.linkedin.com/in/adrianpothuaud/" target="_blank" rel="noopener noreferrer"
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', textDecoration: 'none' }}
+                        onMouseEnter={(e) => e.currentTarget.querySelector('span').style.color = 'var(--color-accent-blue)'}
+                        onMouseLeave={(e) => e.currentTarget.querySelector('span').style.color = 'var(--color-text-secondary)'}
+                    >
+                        <div style={{ padding: '8px', background: 'var(--color-accent-blue-light)', borderRadius: '8px', color: 'var(--color-accent-blue)', flexShrink: 0 }}>
+                            <Linkedin size={18} />
+                        </div>
+                        <span style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', transition: 'color var(--transition-fast)' }}>LinkedIn : Adrian Pothuaud</span>
+                    </a>
+
+                    <a href="https://medium.com/@adrianpothuaud" target="_blank" rel="noopener noreferrer"
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', textDecoration: 'none' }}
+                        onMouseEnter={(e) => e.currentTarget.querySelector('span').style.color = 'var(--color-accent-blue)'}
+                        onMouseLeave={(e) => e.currentTarget.querySelector('span').style.color = 'var(--color-text-secondary)'}
+                    >
+                        <div style={{ padding: '8px', background: 'var(--color-accent-blue-light)', borderRadius: '8px', color: 'var(--color-accent-blue)', flexShrink: 0 }}>
+                            <BookOpen size={18} />
+                        </div>
+                        <span style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', transition: 'color var(--transition-fast)' }}>Medium : @adrianpothuaud</span>
+                    </a>
                 </motion.div>
 
                 {/* Contact Form */}
                 <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
                 >
-                    <form onSubmit={handleSubmit} className="glass-panel" style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                <label htmlFor="name" style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>Nom complet</label>
+                    <form onSubmit={handleSubmit} className="glass-panel" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem', background: '#ffffff' }}>
+                        <div className="contact-form-row">
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', flex: 1 }}>
+                                <label htmlFor="name" style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--color-text-primary)' }}>Nom complet</label>
                                 <input
                                     type="text"
                                     id="name"
                                     required
+                                    placeholder="Jean Dupont"
                                     value={formState.name}
                                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                                    style={{
-                                        padding: '1rem',
-                                        background: 'rgba(0,0,0,0.1)',
-                                        border: '1px solid rgba(255,255,255,0.1)',
-                                        borderRadius: 'var(--radius-md)',
-                                        color: '#fff',
-                                        fontFamily: 'inherit',
-                                        outline: 'none',
-                                        transition: 'border-color 0.2s'
-                                    }}
-                                    onFocus={(e) => e.target.style.borderColor = 'var(--color-accent-blue)'}
-                                    onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+                                    style={inputStyle}
+                                    onFocus={handleFocus}
+                                    onBlur={handleBlur}
                                 />
                             </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                <label htmlFor="email" style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>Email</label>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', flex: 1 }}>
+                                <label htmlFor="email" style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--color-text-primary)' }}>Email</label>
                                 <input
                                     type="email"
                                     id="email"
                                     required
+                                    placeholder="jean@exemple.fr"
                                     value={formState.email}
                                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                                    style={{
-                                        padding: '1rem',
-                                        background: 'rgba(0,0,0,0.1)',
-                                        border: '1px solid rgba(255,255,255,0.1)',
-                                        borderRadius: 'var(--radius-md)',
-                                        color: '#fff',
-                                        fontFamily: 'inherit',
-                                        outline: 'none',
-                                        transition: 'border-color 0.2s'
-                                    }}
-                                    onFocus={(e) => e.target.style.borderColor = 'var(--color-accent-blue)'}
-                                    onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+                                    style={inputStyle}
+                                    onFocus={handleFocus}
+                                    onBlur={handleBlur}
                                 />
                             </div>
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            <label htmlFor="message" style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>Message</label>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                            <label htmlFor="message" style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--color-text-primary)' }}>Message</label>
                             <textarea
                                 id="message"
                                 required
                                 rows="5"
+                                placeholder="Décrivez votre besoin en formation..."
                                 value={formState.message}
                                 onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                                style={{
-                                    padding: '1rem',
-                                    background: 'rgba(0,0,0,0.1)',
-                                    border: '1px solid rgba(255,255,255,0.1)',
-                                    borderRadius: 'var(--radius-md)',
-                                    color: '#fff',
-                                    fontFamily: 'inherit',
-                                    outline: 'none',
-                                    resize: 'vertical',
-                                    transition: 'border-color 0.2s'
-                                }}
-                                onFocus={(e) => e.target.style.borderColor = 'var(--color-accent-blue)'}
-                                onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
-                            ></textarea>
+                                style={{ ...inputStyle, resize: 'vertical' }}
+                                onFocus={handleFocus}
+                                onBlur={handleBlur}
+                            />
                         </div>
 
                         <button
                             type="submit"
                             disabled={isSubmitting}
+                            className="btn-primary"
                             style={{
-                                background: isSubmitting ? 'rgba(59, 130, 246, 0.5)' : 'var(--gradient-primary)',
-                                color: '#fff',
-                                padding: '1rem',
-                                borderRadius: 'var(--radius-md)',
-                                fontWeight: 600,
-                                display: 'flex',
-                                alignItems: 'center',
                                 justifyContent: 'center',
-                                gap: '0.5rem',
-                                border: 'none',
+                                opacity: isSubmitting ? 0.7 : 1,
                                 cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                                transition: 'opacity 0.2s'
+                                background: 'var(--gradient-primary)',
+                                padding: '0.9rem',
+                                borderRadius: 'var(--radius-md)',
+                                fontSize: '0.95rem',
                             }}
-                            onMouseEnter={(e) => !isSubmitting && (e.target.style.opacity = 0.9)}
-                            onMouseLeave={(e) => !isSubmitting && (e.target.style.opacity = 1)}
                         >
                             {isSubmitting ? 'Envoi en cours...' : (
                                 <>
                                     Envoyer le message
-                                    <Send size={18} />
+                                    <Send size={16} />
                                 </>
                             )}
                         </button>
