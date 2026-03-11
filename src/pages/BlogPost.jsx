@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import { loadMarkdownContent } from '../utils/markdown';
+import SEO from '../components/SEO';
 
 const BlogPost = () => {
     const { slug } = useParams();
@@ -52,6 +53,13 @@ const BlogPost = () => {
 
     return (
         <article className="container" style={{ paddingTop: '120px', paddingBottom: 'var(--space-2xl)', maxWidth: '800px' }}>
+            <SEO
+                title={post.title}
+                description={post.excerpt}
+                url={`/blog/${post.slug}`}
+                isBlogPost={true}
+            />
+
             <Link to="/blog" style={{ color: 'var(--color-text-secondary)', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem', fontSize: '0.9rem', transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = 'var(--color-accent-blue)'} onMouseLeave={(e) => e.target.style.color = 'var(--color-text-secondary)'}>
                 <ArrowLeft size={16} /> Retour aux articles
             </Link>

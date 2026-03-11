@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Search, Calendar, Clock, ChevronRight } from 'lucide-react';
 import { loadMarkdownContent } from '../utils/markdown';
 
+import SEO from '../components/SEO';
+
 const BlogList = () => {
     const [articles, setArticles] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -30,6 +32,7 @@ const BlogList = () => {
 
     return (
         <div className="container" style={{ paddingTop: '120px', paddingBottom: 'var(--space-2xl)', minHeight: '80vh' }}>
+            <SEO title="Blog Technique" description="Articles et réflexions sur la Qualité Logicielle, l'automatisation de tests et le tooling." url="/blog" />
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
