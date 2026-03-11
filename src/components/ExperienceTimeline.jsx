@@ -1,11 +1,25 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { loadMarkdownContent } from '../utils/markdown';
 
 const ExperienceTimeline = () => {
     const [experiences, setExperiences] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [expandedItems, setExpandedItems] = useState(new Set([0]));
+
+    const toggleItem = (idx) => {
+        setExpandedItems(prev => {
+            const next = new Set(prev);
+            if (next.has(idx)) {
+                next.delete(idx);
+            } else {
+                next.add(idx);
+            }
+            return next;
+        });
+    };
 
     useEffect(() => {
         const fetchContent = async () => {
@@ -36,19 +50,45 @@ const ExperienceTimeline = () => {
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: '-80px' }}
-                        transition={{ duration: 0.45, delay: idx * 0.1 }}
+                        transition={{ duration: 0.45, delay: idx * 0.07 }}
                     >
-                        <div className="timeline-dot" />
+                        <div className={`timeline-dot${expandedItems.has(idx) ? ' timeline-dot--active' : ''}`} />
 
-                        <div className="glass-panel" style={{ padding: '1.5rem' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.25rem' }}>
-                                <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', marginBottom: 0 }}>{exp.role}</h3>
-                                <span style={{ fontSize: '0.8rem', color: 'var(--color-accent-purple)', fontWeight: 500, background: 'var(--color-accent-purple-light)', padding: '0.2rem 0.6rem', borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap' }}>{exp.period}</span>
-                            </div>
-                            <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', marginBottom: '0.75rem', fontWeight: 500 }}>{exp.company}</p>
-                            <div style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem' }} className="markdown-content">
-                                <ReactMarkdown>{exp.content}</ReactMarkdown>
-                            </div>
+                        <div className="glass-panel timeline-card">
+                            <button
+                                className="timeline-card-header"
+                                onClick={() => toggleItem(idx)}
+                                aria-expanded={expandedItems.has(idx)}
+                            >
+                                <div className="timeline-card-header-info">
+                                    <h3 className="timeline-card-role">{exp.role}</h3>
+                                    <p className="timeline-card-company">{exp.company}</p>
+                                </div>
+                                <div className="timeline-card-header-meta">
+                                    <span className="timeline-period-badge">{exp.period}</span>
+                                    <ChevronDown
+                                        size={18}
+                                        className={`timeline-chevron${expandedItems.has(idx) ? ' timeline-chevron--open' : ''}`}
+                                    />
+                                </div>
+                            </button>
+
+                            <AnimatePresence initial={false}>
+                                {expandedItems.has(idx) && (
+                                    <motion.div
+                                        key="content"
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                                        style={{ overflow: 'hidden' }}
+                                    >
+                                        <div className="timeline-card-body markdown-content">
+                                            <ReactMarkdown>{exp.content}</ReactMarkdown>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
                     </motion.div>
                 ))}
