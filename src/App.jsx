@@ -10,9 +10,13 @@ import BlogList from './pages/BlogList';
 import BlogPost from './pages/BlogPost';
 
 function App() {
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(() => {
+    // Si l'utilisateur est déjà venu, on ne montre plus l'intro
+    return localStorage.getItem('introSeen') !== 'true';
+  });
 
   const handleIntroComplete = () => {
+    localStorage.setItem('introSeen', 'true');
     setShowIntro(false);
     window.scrollTo(0, 0);
   };
