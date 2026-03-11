@@ -10,26 +10,26 @@ mediumUrl: "https://medium.com/@adrianpothuaud/feature-driven-development-with-t
 
 ## Introduction 👋
 
-Hey there, fellow backend developers! 👨‍💻 👩‍💻
+Bonjour à tous, chers développeurs backend ! 👨‍💻 👩‍💻
 
-Have you ever found yourself drowning in a sea of spaghetti code? Or perhaps you've experienced the frustration of hunting down a bug across multiple files with no clear structure? We've all been there! 😩
+Vous vous êtes déjà retrouvé à vous noyer dans un océan de code spaghetti ? Ou peut-être avez-vous vécu la frustration de traquer un bug à travers de multiples fichiers sans structure claire ? On est tous passés par là ! 😩
 
-Today, I'm excited to share with you a game-changing approach that has transformed how I build backend APIs: **Feature-Driven Development (FDD) with TypeScript, Express, and Zod**. 🎯
+Aujourd'hui, j'ai le plaisir de partager avec vous une approche qui a transformé ma façon de concevoir des APIs backend : le **Feature-Driven Development (FDD) avec TypeScript, Express et Zod**. 🎯
 
-In this article, I'll walk you through a minimalist yet powerful project structure that makes your API development more:
+Dans cet article, je vais vous guider à travers une structure de projet minimaliste mais puissante qui rend le développement de vos APIs plus :
 
-- 🧩 **Modular** — Each feature is self-contained
-- 🛡️ **Type-safe** — No more runtime surprises
-- 📝 **Validated** — Input validation from the get-go
-- 🧪 **Testable** — Easy to write and maintain tests
+- 🧩 **Modulaire** — chaque fonctionnalité est autonome
+- 🛡️ **Type-safe** — fini les surprises à l'exécution
+- 📝 **Validé** — validation des entrées dès le départ
+- 🧪 **Testable** — facile à tester et à maintenir
 
-Let's dive in! 🏊‍♂️
+C'est parti ! 🏊‍♂️
 
-## What is Feature-Driven Development? 🤔
+## Qu'est-ce que le Feature-Driven Development ? 🤔
 
-Feature-Driven Development (FDD) is an approach where we organize our codebase around business features rather than technical concerns. Instead of grouping files by their technical role (controllers, services, models), we group them by the feature they implement.
+Le Feature-Driven Development (FDD) est une approche qui consiste à organiser sa base de code autour des fonctionnalités métier plutôt que des préoccupations techniques. Au lieu de regrouper les fichiers par rôle technique (contrôleurs, services, modèles), on les regroupe par fonctionnalité.
 
-For example, rather than having:
+Par exemple, plutôt que d'avoir :
 
 ```
 /controllers
@@ -42,7 +42,7 @@ For example, rather than having:
   - user.ts
 ```
 
-We organize by feature:
+On organise par fonctionnalité :
 
 ```
 /features
@@ -54,11 +54,11 @@ We organize by feature:
     - user.test.ts
 ```
 
-This approach makes your codebase more intuitive, easier to navigate, and simpler to maintain! 🧠
+Cette approche rend votre base de code plus intuitive, plus facile à naviguer et plus simple à maintenir ! 🧠
 
-## Project Structure 📁
+## Structure du projet 📁
 
-Let's look at our sample project structure:
+Voici la structure de notre projet exemple :
 
 ```
 /src
@@ -77,15 +77,15 @@ Let's look at our sample project structure:
   - testAgent.ts            # Testing utility
 ```
 
-This structure is **clean**, **intuitive**, and **scalable**. Each feature has its own folder, containing all the code related to that feature. 🧹
+Cette structure est **propre**, **intuitive** et **scalable**. Chaque fonctionnalité dispose de son propre dossier contenant tout le code qui la concerne. 🧹
 
-## The Core Interfaces 🏗️
+## Les interfaces clés 🏗️
 
-The heart of our approach lies in two key interfaces:
+L'essence de cette approche repose sur deux interfaces fondamentales :
 
 ### IFeature
 
-This interface defines the basic metadata about our API endpoint:
+Cette interface définit les métadonnées de base de notre endpoint API :
 
 ```typescript
 export interface IFeature {
@@ -99,7 +99,7 @@ export interface IFeature {
 
 ### IAPIFeature
 
-This interface defines the actual implementation of our feature:
+Cette interface définit l'implémentation concrète de notre fonctionnalité :
 
 ```typescript
 export interface IAPIFeature<Input, Output> {
@@ -109,11 +109,11 @@ export interface IAPIFeature<Input, Output> {
 }
 ```
 
-By separating the metadata from the implementation, we create a clean separation of concerns. 👌
+En séparant les métadonnées de l'implémentation, on crée une séparation nette des responsabilités. 👌
 
-## Let's Build a Feature! 🏗️
+## Construisons une fonctionnalité ! 🏗️
 
-Let's look at a simple "Hello World" feature to see how it all works together:
+Voici un exemple simple de fonctionnalité "Hello World" pour voir comment tout s'articule :
 
 ```typescript
 // src/features/sayHello.ts
@@ -157,20 +157,20 @@ export const sayHelloApiFeature: IAPIFeature<SayHelloInput, SayHelloOutput> = {
 };
 ```
 
-Let's break down what's happening here:
+Décortiquons ce qui se passe ici :
 
-1. 📋 We define the feature metadata (endpoint, method, name, etc.)
-2. 📝 We define the input and output types for type safety
-3. 🛡️ We create a Zod schema for input validation
-4. 🔧 We implement the feature with `getInput` and `handler` functions
+1. 📋 On définit les métadonnées de la fonctionnalité (endpoint, méthode, nom, etc.)
+2. 📝 On définit les types d'entrée et de sortie pour la sûreté du typage
+3. 🛡️ On crée un schéma Zod pour la validation des entrées
+4. 🔧 On implémente la fonctionnalité avec les fonctions `getInput` et `handler`
 
-The beauty of this approach is that it's **self-contained and focused**. Each feature knows exactly what it needs to do and how to do it. 🎯
+La beauté de cette approche, c'est qu'elle est **autonome et focalisée**. Chaque fonctionnalité sait exactement ce qu'elle doit faire et comment le faire. 🎯
 
-## Input Validation with Zod 🛡️
+## Validation des entrées avec Zod 🛡️
 
-Zod is a TypeScript-first schema validation library that allows us to define our schemas once and get both runtime validation and static type inference.
+Zod est une bibliothèque de validation de schémas orientée TypeScript qui permet de définir ses schémas une seule fois et d'obtenir à la fois la validation à l'exécution et l'inférence de types statiques.
 
-Our `parseBySchema` utility makes it easy to validate incoming requests:
+Notre utilitaire `parseBySchema` simplifie la validation des requêtes entrantes :
 
 ```typescript
 // src/utils/schemaValidation.ts
@@ -188,17 +188,17 @@ export function parseBySchema<T>(
 }
 ```
 
-This function:
-1. 🧪 Takes the request data and a Zod schema
-2. 🔍 Attempts to parse and validate the data
-3. ❌ Throws a formatted error if validation fails
-4. ✅ Returns the validated and typed data if successful
+Cette fonction :
+1. 🧪 Prend les données de la requête et un schéma Zod
+2. 🔍 Tente de parser et valider les données
+3. ❌ Lance une erreur formatée si la validation échoue
+4. ✅ Retourne les données validées et typées en cas de succès
 
-No more manual validation or type assertions! 🎉
+Fini la validation manuelle et les assertions de type ! 🎉
 
-## Wiring It All Together in Express 🔌
+## Tout brancher dans Express 🔌
 
-Our `app.ts` file shows how we register all our features with Express:
+Notre fichier `app.ts` montre comment enregistrer toutes nos fonctionnalités dans Express :
 
 ```typescript
 // src/app.ts
@@ -226,17 +226,17 @@ features.forEach(({ base, api }) => {
 });
 ```
 
-This approach:
-1. 🔄 Loops through all our features
-2. 🚪 Adds middleware (like authentication) if needed
-3. 🎮 Creates a controller function that handles the request
-4. 📝 Registers the endpoint with Express
+Cette approche est :
+1. 🔄 Elle parcourt toutes nos fonctionnalités
+2. 🚪 Elle ajoute les middlewares nécessaires (comme l'authentification)
+3. 🎮 Elle crée une fonction contrôleur qui gère la requête
+4. 📝 Elle enregistre l'endpoint dans Express
 
-It's **declarative**, **consistent**, and **scalable**! 📈
+C'est **déclaratif**, **cohérent** et **scalable** ! 📈
 
-## Testing Made Easy 🧪
+## Les tests simplifiés 🧪
 
-One of the biggest benefits of this approach is how easy it makes testing. Here's how we test our `sayHello` feature:
+L'un des grands avantages de cette approche, c'est la facilité avec laquelle on peut tester. Voici comment on teste notre fonctionnalité `sayHello` :
 
 ```typescript
 // src/features/sayHello.test.ts
@@ -263,49 +263,49 @@ test("sayHelloJohn", async () => {
 });
 ```
 
-Notice how we're using the feature metadata in our tests? This way, if we change the endpoint or method, we only need to update it in one place, and the tests will still work! 🧠
+Vous remarquez comment on réutilise les métadonnées de la fonctionnalité dans nos tests ? Ainsi, si on change l'endpoint ou la méthode, il suffit de le modifier à un seul endroit et les tests fonctionnent toujours ! 🧠
 
-## Benefits of This Approach 🌟
+## Les avantages de cette approche 🌟
 
-### Scalability 📈
+### Scalabilité 📈
 
-As your project grows, you can simply add more features without touching existing code. Each feature is isolated, so you can work on one feature without affecting others.
+À mesure que votre projet grandit, vous n'avez qu'à ajouter de nouvelles fonctionnalités sans toucher au code existant. Chaque fonctionnalité étant isolée, vous pouvez travailler sur l'une sans impacter les autres.
 
-### Type Safety 🛡️
+### Sûreté du typage 🛡️
 
-With TypeScript and Zod working together, you get end-to-end type safety. Your IDE will catch type errors before you even run your code.
+Avec TypeScript et Zod qui travaillent ensemble, vous bénéficiez d'une sûreté du typage de bout en bout. Votre IDE détecte les erreurs de type avant même que vous n'exécutiez votre code.
 
-### Input Validation 🔍
+### Validation des entrées 🔍
 
-Zod provides robust input validation out of the box. No more manual checks or custom validation functions.
+Zod fournit une validation robuste des entrées clé en main. Fini les vérifications manuelles ou les fonctions de validation personnalisées.
 
-### Testability 🧪
+### Testabilité 🧪
 
-Each feature is self-contained, making it easy to test in isolation. And since the business logic is separate from the Express handler, you can test it without spinning up an HTTP server.
+Chaque fonctionnalité étant autonome, il est facile de la tester de manière isolée. Et puisque la logique métier est séparée du gestionnaire Express, vous pouvez la tester sans démarrer un serveur HTTP.
 
-### Developer Experience 👨‍💻
+### Expérience développeur 👨‍💻
 
-New team members can quickly understand how the codebase works because everything follows the same pattern. They can look at an existing feature to understand how to build a new one.
+Les nouveaux membres de l'équipe comprennent rapidement le fonctionnement de la base de code, car tout suit le même schéma. Il leur suffit de regarder une fonctionnalité existante pour savoir comment en construire une nouvelle.
 
-## Adding New Features 🚀
+## Ajouter de nouvelles fonctionnalités 🚀
 
-Let's say you want to add a new feature to get user information. Here's how you'd do it:
+Supposons que vous souhaitiez ajouter une fonctionnalité pour récupérer des informations utilisateur. Voici comment procéder :
 
-1. Create a new file `src/features/getUser.ts`
-2. Define your feature metadata, input/output types, and schema
-3. Implement the feature logic
-4. Add the feature to the `features` array in `app.ts`
-5. Write tests for your feature
+1. Créez un nouveau fichier `src/features/getUser.ts`
+2. Définissez les métadonnées, les types d'entrée/sortie et le schéma
+3. Implémentez la logique de la fonctionnalité
+4. Ajoutez la fonctionnalité au tableau `features` dans `app.ts`
+5. Écrivez les tests correspondants
 
-That's it! No need to modify existing code or worry about breaking other features. 🎉
+C'est tout ! Pas besoin de modifier le code existant ni de craindre de casser d'autres fonctionnalités. 🎉
 
 ## Conclusion 🎬
 
-Feature-Driven Development with TypeScript, Express, and Zod is a powerful approach to building backend APIs. It provides a clean, consistent structure that scales well with your project.
+Le Feature-Driven Development avec TypeScript, Express et Zod est une approche puissante pour construire des APIs backend. Il offre une structure propre et cohérente qui s'adapte bien à la croissance de votre projet.
 
-By organizing your code around business features and leveraging the type safety of TypeScript and Zod, you can build robust, maintainable APIs that are a joy to work with. 😊
+En organisant votre code autour des fonctionnalités métier et en tirant parti de la sûreté du typage de TypeScript et Zod, vous pouvez bâtir des APIs robustes et maintenables, vraiment agréables à travailler. 😊
 
-## Resources 📚
+## Ressources 📚
 
 - [TypeScript](https://www.typescriptlang.org/)
 - [Express](https://expressjs.com/)
@@ -313,4 +313,4 @@ By organizing your code around business features and leveraging the type safety 
 - [Vitest](https://vitest.dev/)
 - [Supertest](https://github.com/ladjs/supertest)
 
-What approach do you use for structuring your API projects? Have you tried Feature-Driven Development before? Let me know in the comments below! 👇
+Quelle approche utilisez-vous pour structurer vos projets API ? Avez-vous déjà essayé le Feature-Driven Development ? Partagez votre avis dans les commentaires ! 👇

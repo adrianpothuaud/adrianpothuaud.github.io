@@ -8,30 +8,30 @@ tags: ["Postman", "Newman", "GitHub Actions", "API Testing", "CI/CD", "ATDD"]
 mediumUrl: "https://medium.com/@adrianpothuaud/unlock-file-system-and-git-sharing-with-postman"
 ---
 
-> **Disclaimer**: This article is more intended for not-so-technical testers, functional QA testers or simply people wanting to test their API with an intuitive tool like Postman. It could be a solution to share testing stuff between developers and functional testers. However, if you keep reading because this topic is interesting for you, enjoy!
+> **Note** : Cet article s'adresse plutôt aux testeurs peu techniques, aux testeurs fonctionnels QA, ou simplement aux personnes souhaitant tester leur API avec un outil intuitif comme Postman. Il peut être une solution pour partager les ressources de test entre développeurs et testeurs fonctionnels. Si vous continuez à lire parce que le sujet vous intéresse, bonne lecture !
 
-I don't know why Postman still doesn't have unlocked a file system synchronization system but it's really annoying in a lot of projects — especially when we see other tools like [Bruno](https://www.usebruno.com/) with this feature.
+Je ne comprends pas pourquoi Postman n'a toujours pas activé un système de synchronisation avec le système de fichiers — c'est vraiment gênant dans de nombreux projets, surtout quand on voit d'autres outils comme [Bruno](https://www.usebruno.com/) qui proposent déjà cette fonctionnalité.
 
-In this article I'll show you how I use to unlock file system and `.git` sharing of my Postman Collections and Environments as well as how I use them in GitHub Actions for continuous integration testing and Acceptance Tests Driven Development.
+Dans cet article, je vous montrerai comment j'utilise pour débloquer la synchronisation des Collections et Environnements Postman via le système de fichiers et `.git`, ainsi que comment je les intègre dans GitHub Actions pour les tests d'intégration continue et l'Acceptance Test-Driven Development.
 
-## Starter Project
+## Projet de départ
 
-Let's start all together! We'll create a very simple API server using Node.js and Express.
+Commençons tous ensemble ! Nous allons créer un serveur API très simple avec Node.js et Express.
 
-- First, open a Terminal and create a new Folder.
-- Then use `npm init`:
+- Ouvrez d'abord un Terminal et créez un nouveau dossier.
+- Ensuite, utilisez `npm init` :
 
 ```bash
 npm init
 ```
 
-- Then install Express:
+- Puis installez Express :
 
 ```bash
 npm install express
 ```
 
-- Then create `app.js` file as follow:
+- Créez ensuite le fichier `app.js` comme suit :
 
 ```javascript
 const express = require('express');
@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 module.exports = app;
 ```
 
-- Then create a `server.js` file:
+- Créez ensuite un fichier `server.js` :
 
 ```javascript
 const http = require('http');
@@ -54,7 +54,7 @@ const server = http.createServer(app);
 module.exports = server;
 ```
 
-- And a `start.js`:
+- Et un `start.js` :
 
 ```javascript
 const server = require("./server");
@@ -65,7 +65,7 @@ server.listen(port, () => {
 });
 ```
 
-- Update the NPM start script in `package.json` to use `node start.js`:
+- Mettez à jour le script de démarrage NPM dans `package.json` pour utiliser `node start.js` :
 
 ```json
 "scripts": {
@@ -74,43 +74,43 @@ server.listen(port, () => {
 }
 ```
 
-Then test the app by running `npm start` and open your web browser at `http://localhost:3000`.
+Testez ensuite l'application en exécutant `npm start` et ouvrez votre navigateur à `http://localhost:3000`.
 
-## Setting things up
+## Mise en place
 
 ### Git
 
-- Initialize Git in your project then add it to GitHub.
-- Add a `.gitignore` file with `node_modules` and `.env*`:
+- Initialisez Git dans votre projet puis ajoutez-le sur GitHub.
+- Ajoutez un fichier `.gitignore` avec `node_modules` et `.env*` :
 
 ```
 node_modules
 .env*
 ```
 
-### Postman Collection and Environment
+### Collection et Environnement Postman
 
-- Start Postman and create 1 new Collection and 1 new Environment (called `local`)
-- Set `baseUrl` to `http://localhost:3000` in local Environment
-- Add a Request `GET {{baseUrl}}/` and test that status code is 200
-- Verify you can Run the collection and All tests PASS
+- Démarrez Postman et créez 1 nouvelle Collection et 1 nouvel Environnement (appelé `local`)
+- Définissez `baseUrl` à `http://localhost:3000` dans l'environnement local
+- Ajoutez une requête `GET {{baseUrl}}/` et vérifiez que le code de statut est 200
+- Vérifiez que vous pouvez exécuter la collection et que tous les tests passent
 
-### Setup for file system sync
+### Configuration pour la synchronisation avec le système de fichiers
 
-Now we'll need your Postman API Token, the Collection ID and the Environment ID to continue and setup our Continuous API Testing Flow…
+Nous aurons besoin de votre Token API Postman, de l'ID de la Collection et de l'ID de l'Environnement pour configurer notre flux de Tests API Continus.
 
-- Create a file `.env.local` in your project
-- Open Collection details and click the Info section
-- Then copy the collection ID and paste it to `.env.local` as `POSTMAN_COLLECTION_ID`
-- Open Environment details and click the Info section, copy the ID and paste it to `.env.local` file as `POSTMAN_ENVIRONMENT_ID`
+- Créez un fichier `.env.local` dans votre projet
+- Ouvrez les détails de la Collection et cliquez sur la section Info
+- Copiez l'ID de la collection et collez-le dans `.env.local` sous le nom `POSTMAN_COLLECTION_ID`
+- Ouvrez les détails de l'Environnement et cliquez sur la section Info, copiez l'ID et collez-le dans `.env.local` sous le nom `POSTMAN_ENVIRONMENT_ID`
 
-Then we need a Postman API Token that we can generate using the [official guide](https://learning.postman.com/docs/developer/postman-api/authentication/#generate-a-postman-api-key).
+Il vous faudra ensuite un Token API Postman que vous pouvez générer en suivant le [guide officiel](https://learning.postman.com/docs/developer/postman-api/authentication/#generate-a-postman-api-key).
 
-Copy and paste your token in your `.env.local` file as `POSTMAN_API_TOKEN`.
+Copiez et collez votre token dans votre fichier `.env.local` sous le nom `POSTMAN_API_TOKEN`.
 
-Now we'll create a node.js script called `synchronizePostmanFiles.js` in charge of downloading our Collection and Environment files from Postman servers.
+Nous allons maintenant créer un script node.js appelé `synchronizePostmanFiles.js` chargé de télécharger nos fichiers Collection et Environnement depuis les serveurs Postman.
 
-We need axios that we can install with `npm i axios`:
+Nous avons besoin d'axios que vous pouvez installer avec `npm i axios` :
 
 ```javascript
 const axios = require('axios');
@@ -148,18 +148,18 @@ fetchCollection();
 fetchEnvironment();
 ```
 
-In order to test our script in local env we'll need the `dotenv-cli`:
+Pour tester notre script en local, nous aurons besoin du `dotenv-cli` :
 
 ```bash
 npm i -g dotenv-cli
 npx dotenv -e .env.local -- node synchronizePostmanFiles.js
 ```
 
-Then we'll have `collection.json` and `environment.json` files added to the project.
+Les fichiers `collection.json` et `environment.json` seront alors ajoutés au projet.
 
-### Enabling synchronization
+### Activation de la synchronisation
 
-Add a `sync` npm script that we'll use later for synchronization in the CI:
+Ajoutez un script npm `sync` que nous utiliserons plus tard pour la synchronisation en CI :
 
 ```json
 "scripts": {
@@ -170,23 +170,23 @@ Add a `sync` npm script that we'll use later for synchronization in the CI:
 }
 ```
 
-We could use multiple solutions to handle synchronization, but the one I prefer is using **husky** and a pre-commit hook, so anytime you will commit, the Collection and Environment files will be synchronized with Postman servers.
+Plusieurs solutions peuvent gérer la synchronisation, mais celle que je préfère est d'utiliser **husky** et un hook pre-commit : ainsi, à chaque commit, les fichiers Collection et Environnement seront automatiquement synchronisés avec les serveurs Postman.
 
-### Setting Newman and GitHub Actions
+### Configuration de Newman et GitHub Actions
 
-Now, the interesting part — we'll setup Newman in GitHub Actions:
+Passons maintenant à la partie intéressante — la configuration de Newman dans GitHub Actions :
 
 ```bash
 npm i -D newman
 ```
 
-And in order to "run & test" our server we'll use [start-server-and-test](https://www.npmjs.com/package/start-server-and-test):
+Et pour "démarrer et tester" notre serveur, nous utiliserons [start-server-and-test](https://www.npmjs.com/package/start-server-and-test) :
 
 ```bash
 npm install --save-dev start-server-and-test
 ```
 
-Then we can refine the test script:
+On peut ensuite affiner le script de test :
 
 ```json
 "scripts": {
@@ -197,7 +197,7 @@ Then we can refine the test script:
 }
 ```
 
-And test in local with:
+Et tester en local avec :
 
 ```bash
 npx dotenv -e .env.local -- npm test
@@ -205,7 +205,7 @@ npx dotenv -e .env.local -- npm test
 
 ### GitHub Actions
 
-Now simply add a `.github/workflows/ci.yml` file:
+Il suffit maintenant d'ajouter un fichier `.github/workflows/ci.yml` :
 
 ```yaml
 name: Validate (Continuous Integration)
@@ -242,22 +242,22 @@ jobs:
         run: npm run test
 ```
 
-In GitHub repository, add the corresponding secrets (`POSTMAN_API_TOKEN`, `POSTMAN_COLLECTION_ID`, `POSTMAN_ENVIRONMENT_ID`) and commit/push your changes.
+Dans le dépôt GitHub, ajoutez les secrets correspondants (`POSTMAN_API_TOKEN`, `POSTMAN_COLLECTION_ID`, `POSTMAN_ENVIRONMENT_ID`) et commitez/poussez vos modifications.
 
-Then you can see CI in actions — Congratulations! 🎉
+Vous pouvez alors voir la CI tourner dans les Actions — Félicitations ! 🎉
 
-## Adding a new Feature using ATDD with Postman
+## Ajouter une nouvelle fonctionnalité avec l'ATDD et Postman
 
-With this setup, you can now practice **Acceptance Test-Driven Development (ATDD)** with Postman:
+Grâce à cette configuration, vous pouvez désormais pratiquer l'**Acceptance Test-Driven Development (ATDD)** avec Postman :
 
-1. Write your Postman tests first (before the feature is implemented)
-2. Run the CI pipeline — tests will fail (red)
-3. Implement the feature
-4. Run the CI pipeline again — tests should pass (green)
-5. Synchronize your Postman collection to keep everything up to date
+1. Rédigez d'abord vos tests Postman (avant que la fonctionnalité soit implémentée)
+2. Lancez le pipeline CI — les tests vont échouer (rouge)
+3. Implémentez la fonctionnalité
+4. Relancez le pipeline CI — les tests devraient passer (vert)
+5. Synchronisez votre collection Postman pour tout garder à jour
 
-This workflow creates a common language between developers, functional testers and business stakeholders — while keeping all tests versioned in your Git repository.
+Ce flux de travail crée un langage commun entre les développeurs, les testeurs fonctionnels et les parties prenantes métier — tout en maintenant tous les tests versionnés dans votre dépôt Git.
 
 ---
 
-This approach is particularly well-suited for teams where functional testers aren't comfortable with code-based testing frameworks like Jest or Playwright. Postman's intuitive UI makes it accessible to everyone, while Newman and GitHub Actions bring the automation and CI/CD integration needed for continuous quality assurance.
+Cette approche convient particulièrement bien aux équipes dont les testeurs fonctionnels ne sont pas à l'aise avec des frameworks de test basés sur le code comme Jest ou Playwright. L'interface intuitive de Postman la rend accessible à tous, tandis que Newman et GitHub Actions apportent l'automatisation et l'intégration CI/CD nécessaires à une assurance qualité continue.

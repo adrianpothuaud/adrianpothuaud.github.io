@@ -8,78 +8,78 @@ tags: ["Test Automation", "Best Practices", "Strategy"]
 mediumUrl: "https://medium.com/@adrianpothuaud/5-essential-test-automation-rules-for-a-reliable-and-scalable-testing-strategy"
 ---
 
-Test automation can be a game-changer for software projects, but only if done right. Too often, teams either overcomplicate it or avoid it altogether. To help you navigate the pitfalls and get the most out of test automation, here are five rules that can set you up for success.
+L'automatisation des tests peut tout changer pour un projet logiciel, mais seulement si elle est bien menée. Trop souvent, les équipes soit la compliquent à l'excès, soit l'évitent complètement. Pour vous aider à contourner les pièges et tirer le meilleur parti de l'automatisation, voici cinq règles pour vous mettre sur la voie du succès.
 
-## #1: Just Start Doing It
+## #1 : Lancez-vous, maintenant
 
-The biggest mistake you can make with test automation? Overthinking it. Just start.
+La plus grande erreur que vous puissiez commettre avec l'automatisation des tests ? Trop réfléchir avant d'agir. Lancez-vous, tout simplement.
 
-Too many teams spend months trying to define the "perfect" automation strategy or toolset. They get stuck in research mode, afraid to take action. But automation is something you learn by doing. You'll write some bad tests. Some will be flaky. Some will be pointless. That's part of the process.
+Trop d'équipes passent des mois à vouloir définir la stratégie ou la pile technologique "parfaite". Elles restent bloquées en mode recherche, paralysées à l'idée de passer à l'action. Pourtant, l'automatisation, ça s'apprend en pratiquant. Vous écrirez de mauvais tests. Certains seront instables. D'autres seront inutiles. Cela fait partie du processus.
 
-Start small. Automate basic regression tests or critical user flows first. Learn from failures, iterate, and improve. The sooner you start, the sooner you'll build expertise and confidence.
+Commencez petit. Automatisez d'abord les tests de régression de base ou les parcours utilisateurs critiques. Apprenez de vos erreurs, itérez et améliorez-vous. Plus tôt vous démarrez, plus vite vous bâtirez votre expertise et votre confiance.
 
-## #2: Do Not Try to Automate Everything
+## #2 : N'essayez pas de tout automatiser
 
-Not everything is worth automating. Some things shouldn't be automated at all.
+Tout ne mérite pas d'être automatisé. Certaines choses ne devraient tout simplement pas l'être.
 
-Examples of bad automation candidates:
+Exemples de mauvais candidats à l'automatisation :
 
-- Features that are still unstable or frequently changing (your test maintenance effort will be painful).
-- UI elements with constantly shifting designs (you'll chase moving selectors all day).
-- Extremely complex scenarios that require too much test setup.
+- Les fonctionnalités encore instables ou fréquemment modifiées (la maintenance des tests sera un cauchemar).
+- Les éléments d'interface dont le design évolue constamment (vous passerez vos journées à courir après des sélecteurs qui changent).
+- Les scénarios extrêmement complexes nécessitant une configuration de test trop lourde.
 
-Instead, focus on tests that provide real value:
+Concentrez-vous plutôt sur les tests qui apportent une vraie valeur :
 
-- Core user journeys (login, checkout, key workflows).
-- Repetitive regression tests that run often.
-- APIs and backend logic (they're usually more stable than UI tests).
+- Les parcours utilisateurs principaux (connexion, paiement, flux critiques).
+- Les tests de régression répétitifs qui s'exécutent souvent.
+- Les APIs et la logique backend (généralement plus stables que les tests d'interface).
 
-Be smart about where you invest your automation efforts.
+Soyez stratégique dans vos investissements en automatisation.
 
-## #3: Never Delete a Test
+## #3 : Ne supprimez jamais un test
 
-Every test you write contributes to your functional coverage. If a test starts failing, don't just delete it — ask why.
+Chaque test que vous écrivez contribue à votre couverture fonctionnelle. Si un test commence à échouer, ne le supprimez pas — demandez-vous pourquoi.
 
-If the feature is deprecated, sure, remove the test. But if it's failing due to a real issue, it's an opportunity to improve your app.
+Si la fonctionnalité est obsolète, oui, retirez le test. Mais si l'échec révèle un vrai problème, c'est une opportunité d'améliorer votre application.
 
-Good tests act as safety nets, catching regressions early. Even old tests might surface unexpected bugs in the future. Instead of deleting them, consider:
+Les bons tests agissent comme des filets de sécurité, détectant les régressions tôt. Même d'anciens tests peuvent mettre en lumière des bugs inattendus à l'avenir. Plutôt que de les supprimer, envisagez de :
 
-- Refactoring flaky tests.
-- Marking some as "skipped" until they can be fixed.
-- Moving lower-priority tests to a separate suite that runs less frequently.
+- Refactoriser les tests instables.
+- Marquer certains comme "ignorés" le temps de les corriger.
+- Déplacer les tests moins prioritaires dans une suite distincte qui s'exécute moins fréquemment.
 
-Your tests are valuable assets. Treat them like it.
+Vos tests sont des actifs précieux. Traitez-les comme tels.
 
-## #4: Stabilize Your Selectors
+## #4 : Stabilisez vos sélecteurs
 
-UI test flakiness is often caused by unstable element selectors. If your tests constantly break because elements can't be found, you're doing it wrong.
+L'instabilité des tests d'interface est souvent causée par des sélecteurs d'éléments fragiles. Si vos tests échouent constamment parce que des éléments sont introuvables, c'est que vous faites fausse route.
 
-Here's what you should do:
+Voici ce que vous devriez faire :
 
-- Avoid using CSS classes unless they are specifically meant for testing (framework-generated class names often change).
-- Prefer unique IDs for elements whenever possible.
-- Use accessibility-driven selectors (aria-labels, role attributes, etc.).
-- In modern front-end apps (React, Angular, Vue), talk to your dev team about adding `data-test` attributes for reliable selectors.
+- Évitez d'utiliser des classes CSS sauf si elles sont spécifiquement conçues pour les tests (les noms de classes générés par les frameworks changent souvent).
+- Privilégiez les IDs uniques pour les éléments chaque fois que c'est possible.
+- Utilisez des sélecteurs basés sur l'accessibilité (aria-labels, attributs de rôle, etc.).
+- Dans les applications front-end modernes (React, Angular, Vue), parlez à votre équipe de développement de l'ajout d'attributs `data-test` pour des sélecteurs fiables.
 
-Good selectors = stable tests. Stable tests = less maintenance hassle.
+De bons sélecteurs = des tests stables. Des tests stables = moins de maintenance.
 
-## #5: Keep It Simple
+## #5 : Restez simple
 
-Test automation is supposed to make your life easier, not harder. Avoid overengineering.
+L'automatisation des tests est censée vous faciliter la vie, pas la compliquer. Évitez la surconception.
 
-A common mistake is trying to build a massive automation framework with all the bells and whistles — custom reporting, CI/CD integrations, complex test data management — before you even have solid basic tests.
+Une erreur fréquente consiste à vouloir construire un framework d'automatisation colossal avec toutes les fonctionnalités imaginables — rapports personnalisés, intégrations CI/CD, gestion complexe des données de test — avant même d'avoir des tests de base solides.
 
-Instead, follow these guidelines:
+Suivez plutôt ces principes :
 
-- Start with simple, readable test cases.
-- Use existing tools and libraries instead of reinventing the wheel.
-- Keep your test code modular and maintainable (use page objects, helper functions, etc.).
-- Make sure running tests is easy — one command should execute them all.
+- Commencez par des cas de tests simples et lisibles.
+- Utilisez les outils et bibliothèques existants plutôt que de réinventer la roue.
+- Gardez votre code de test modulaire et maintenable (utilisez des page objects, des fonctions utilitaires, etc.).
+- Assurez-vous que l'exécution des tests est simple — une seule commande doit tous les lancer.
 
-The simpler your setup, the easier it will be to scale automation across your team.
+Plus votre configuration est simple, plus il sera facile de déployer l'automatisation à l'échelle de votre équipe.
 
 ---
 
-Test automation isn't about perfection — it's about consistency and improvement. By following these five rules, you'll build an automation strategy that is practical, reliable, and beneficial for your project.
+L'automatisation des tests, ce n'est pas une question de perfection — c'est une question de régularité et d'amélioration continue. En appliquant ces cinq règles, vous bâtirez une stratégie d'automatisation pratique, fiable et bénéfique pour votre projet.
 
-Now go write some tests! 🚀
+Maintenant, allez écrire des tests ! 🚀

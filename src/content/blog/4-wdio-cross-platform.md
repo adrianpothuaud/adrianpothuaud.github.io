@@ -8,26 +8,26 @@ tags: ["WebdriverIO", "Cross-Platform", "Mobile Testing", "TypeScript"]
 mediumUrl: "https://medium.com/@adrianpothuaud/supercharge-your-e2e-tests-cross-platform-text-selectors-in-webdriver-io"
 ---
 
-Hey Testers! Ever feel like you're writing the same test logic three times just to cover Web, Android, and iOS? Managing platform-specific selectors can be a major headache, bloating your codebase and slowing down test creation. What if there was a smoother way?
+Salut les testeurs ! Vous avez déjà eu l'impression d'écrire la même logique de test trois fois, juste pour couvrir le Web, Android et iOS ? Gérer des sélecteurs spécifiques à chaque plateforme peut être un vrai casse-tête : ça alourdit votre base de code et ralentit la création de tests. Et s'il existait une approche plus fluide ?
 
-Today, let's dive into a practical approach using Webdriver.IO to streamline your end-to-end (E2E) automation with **cross-platform text-based selectors**. We'll look at real code examples that demonstrate how you can write cleaner, more maintainable tests that run seamlessly across different environments.
+Plongeons aujourd'hui dans une méthode concrète avec Webdriver.IO pour rationaliser votre automatisation end-to-end grâce aux **sélecteurs cross-platform basés sur le texte**. Nous examinerons des exemples de code réels qui montrent comment écrire des tests plus propres et plus maintenables, s'exécutant sans accroc sur différents environnements.
 
-## The Challenge: Platform-Specific Selectors
+## Le défi : les sélecteurs spécifiques à chaque plateforme
 
-Typically, finding an element requires different strategies:
-- **Web**: CSS selectors or XPath
-- **Android**: UIAutomator (resource IDs, text, etc.)
-- **iOS**: Predicate Strings or Class Chains
+Généralement, trouver un élément requiert des stratégies différentes selon la plateforme :
+- **Web** : sélecteurs CSS ou XPath
+- **Android** : UIAutomator (resource IDs, texte, etc.)
+- **iOS** : Predicate Strings ou Class Chains
 
-Maintaining separate selectors for each element on each platform quickly becomes cumbersome.
+Maintenir des sélecteurs séparés pour chaque élément sur chaque plateforme devient vite fastidieux.
 
-## The Solution: A Unified Selector Strategy
+## La solution : une stratégie de sélecteurs unifiée
 
-The core idea is to abstract away the platform differences. We define a single `CrossSelector` object that holds the appropriate selector string for each platform (Web, Android, iOS). Then, a base utility determines the current platform and picks the correct selector automatically.
+L'idée centrale est d'abstraire les différences entre plateformes. On définit un objet `CrossSelector` unique qui contient la chaîne de sélecteur appropriée pour chaque plateforme (Web, Android, iOS). Ensuite, une classe utilitaire de base détermine la plateforme courante et choisit automatiquement le bon sélecteur.
 
-### 1. The Foundation: BaseObject and CrossSelector
+### 1. Les fondations : BaseObject et CrossSelector
 
-Let's start with a base class that our Page Objects will inherit from. It introduces the `CrossSelector` type and the logic to resolve the correct selector at runtime.
+Commençons par une classe de base dont hériteront nos Page Objects. Elle introduit le type `CrossSelector` et la logique pour résoudre le bon sélecteur à l'exécution.
 
 ```typescript
 // Define the structure for our cross-platform selectors
@@ -67,11 +67,11 @@ export default class BaseObject {
 }
 ```
 
-**Benefit**: Your common actions (`click`, `fill`, `waitForDisplayed`) now work with a single `CrossSelector` object, regardless of the platform your test is running on.
+**Avantage** : vos actions communes (`click`, `fill`, `waitForDisplayed`) fonctionnent désormais avec un seul objet `CrossSelector`, quelle que soit la plateforme sur laquelle votre test s'exécute.
 
-### 2. Handling Text Variations: TranslatableObject
+### 2. Gérer les variations de texte : TranslatableObject
 
-Text is tricky. "Log in" might be "Se connecter" in French. Even in the same language, button text could differ slightly between web and mobile. We can extend our `BaseObject` to handle this.
+Le texte, c'est une autre affaire. "Log in" peut devenir "Se connecter" en français. Même dans la même langue, le libellé d'un bouton peut légèrement différer entre le web et le mobile. On peut étendre notre `BaseObject` pour gérer cela.
 
 ```typescript
 // Structure to hold translations for different languages
@@ -98,11 +98,11 @@ export class TranslatableObject extends BaseObject {
 }
 ```
 
-**Benefit**: Your selectors can automatically adapt to the language configured for the test run, making your tests more robust for internationalized applications.
+**Avantage** : vos sélecteurs peuvent s'adapter automatiquement à la langue configurée pour la session de test, rendant vos tests plus robustes pour les applications internationalisées.
 
-### 3. Putting it Together: The SignIn Page/Screen Object
+### 3. Tout assembler : le Page Object de la page SignIn
 
-Now let's see how a Page Object utilizes these base classes.
+Voyons maintenant comment un Page Object exploite ces classes de base.
 
 ```typescript
 import { crossTxtSel, androidResourceIdSel, iosClassChainSel, iosNameSel } from "../utils/selectors.ts";
@@ -158,11 +158,11 @@ const signIn = new SignIn();
 export default signIn;
 ```
 
-**Benefit**: The Page Object clearly defines elements using the `CrossSelector` structure. High-level methods like `fillAndSubmit` encapsulate the interaction logic, hiding the platform-specific details from the actual test scripts.
+**Avantage** : le Page Object définit clairement les éléments à l'aide de la structure `CrossSelector`. Les méthodes de haut niveau comme `fillAndSubmit` encapsulent la logique d'interaction, masquant les détails spécifiques à la plateforme des scripts de test eux-mêmes.
 
-### 4 & 5. The Payoff: Cleaner Test Scripts
+### 4 & 5. La récompense : des scripts de test bien plus lisibles
 
-Look how much cleaner the actual test becomes! It focuses on the **what** (the test steps and assertions) rather than the **how** (finding elements on each platform).
+Regardez comme le test lui-même devient propre ! Il se concentre sur le **quoi** (les étapes et assertions du test) plutôt que sur le **comment** (trouver les éléments sur chaque plateforme).
 
 ```typescript
 import signIn from "@/framework/signIn.ts";
@@ -197,15 +197,15 @@ describe("signIn", () => {
 });
 ```
 
-**Benefit**:
+**Avantage** :
 
-- **Readability**: Tests are much easier to read and understand.
-- **Maintainability**: If a selector changes, you update it in one place (the Page Object's `CrossSelector`) instead of three.
-- **Efficiency**: Writing new cross-platform tests becomes significantly faster.
-- **Robustness**: Centralizing selector logic reduces the chance of errors.
+- **Lisibilité** : les tests sont beaucoup plus faciles à lire et à comprendre.
+- **Maintenabilité** : si un sélecteur change, vous le mettez à jour en un seul endroit (le `CrossSelector` du Page Object) plutôt que trois.
+- **Efficacité** : la rédaction de nouveaux tests cross-platform devient nettement plus rapide.
+- **Robustesse** : centraliser la logique des sélecteurs réduit les risques d'erreurs.
 
-## Wrapping Up
+## En résumé
 
-By abstracting platform differences using `CrossSelector` objects within a `BaseObject`, potentially adding a translation layer, and encapsulating interactions in Page Objects, you can create a powerful and maintainable E2E testing framework with Webdriver.IO. Your tests become cleaner, more resilient, and easier to manage across Web, Android, and iOS.
+En abstrayant les différences entre plateformes grâce aux objets `CrossSelector` au sein d'un `BaseObject`, en ajoutant éventuellement une couche de traduction, et en encapsulant les interactions dans des Page Objects, vous pouvez créer un framework de tests E2E puissant et maintenable avec Webdriver.IO. Vos tests deviennent plus lisibles, plus résilients et plus simples à gérer sur Web, Android et iOS.
 
-Give this approach a try and see how it can enhance your cross-platform testing efforts! Happy testing!
+Essayez cette approche et observez comment elle peut transformer vos efforts de tests cross-platform ! Bon testing !
