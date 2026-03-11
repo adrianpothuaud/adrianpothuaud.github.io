@@ -1,27 +1,24 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-
-const services = [
-    {
-        title: "Formation Cypress",
-        description: "Maîtrisez les tests End-to-End modernes. De la configuration initiale aux tests de composants, devenez autonome sur Cypress.",
-        color: "var(--color-accent-green)",
-        features: ["Setup & Architecture", "Custom Commands", "Tests API & UI", "CI/CD Integration"]
-    },
-    {
-        title: "Masterclass Playwright",
-        description: "Exploitez toute la puissance de l'outil nouvelle génération de Microsoft. Multi-browser, rapidité, et robustesse.",
-        color: "var(--color-accent-purple)",
-        features: ["Auto-waiting avancé", "Fixtures", "Trace Viewer", "Parallelization"]
-    },
-    {
-        title: "Coaching Selenium & WDIO",
-        description: "Mise à l'échelle de vos suites historiques ou architecture de nouveaux frameworks sur mesure avec le standard W3C.",
-        color: "var(--color-accent-blue)",
-        features: ["Page Object Model", "Grid & Cloud", "Appium (Mobile)", "Reporting"]
-    }
-];
+import ReactMarkdown from 'react-markdown';
+import { loadMarkdownContent } from '../utils/markdown';
 
 const Services = () => {
+    const [services, setServices] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchContent = async () => {
+            const globResult = import.meta.glob('../content/services/*.md', { query: '?raw', import: 'default' });
+            const posts = await loadMarkdownContent(globResult);
+            setServices(posts.sort((a, b) => a.order - b.order));
+            setLoading(false);
+        };
+        fetchContent();
+    }, []);
+
+    if (loading) return null;
+
     return (
         <section id="services" style={{ padding: 'var(--space-2xl) 0' }}>
             <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
@@ -39,20 +36,24 @@ const Services = () => {
                         whileHover={{ y: -10, borderColor: service.color }}
                         style={{ padding: '2rem', transition: 'border-color 0.3s' }}
                     >
-                        <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: `${service.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
+                        <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: `${service.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', boxShadow: 'var(--shadow-sm)' }}>
                             <div style={{ width: '24px', height: '24px', background: service.color, borderRadius: '50%' }}></div>
                         </div>
 
                         <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{service.title}</h3>
-                        <p style={{ color: 'var(--color-text-secondary)', marginBottom: '1.5rem', lineHeight: 1.6 }}>{service.description}</p>
+                        <div style={{ color: 'var(--color-text-secondary)', marginBottom: '1.5rem', lineHeight: 1.6 }} className="markdown-content">
+                            <ReactMarkdown>{service.content}</ReactMarkdown>
+                        </div>
 
-                        <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            {service.features.map((feature, fIdx) => (
-                                <li key={fIdx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: '#ccc' }}>
-                                    <span style={{ color: service.color }}>✓</span> {feature}
-                                </li>
-                            ))}
-                        </ul>
+                        {service.features && (
+                            <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                {service.features.map((feature, fIdx) => (
+                                    <li key={fIdx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>
+                                        <span style={{ color: service.color, fontWeight: 'bold' }}>✓</span> {feature}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </motion.div>
                 ))}
             </div>

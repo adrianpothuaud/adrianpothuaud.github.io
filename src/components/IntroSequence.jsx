@@ -73,71 +73,34 @@ const IntroSequence = ({ onComplete }) => {
                             {/* Hier */}
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.8 }}
-                                style={{
-                                    padding: '2rem', border: '2px solid #333', backgroundColor: '#0a0a0a',
-                                    fontFamily: 'monospace', borderRadius: '4px', position: 'relative'
-                                }}
+                                style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)', height: '280px', boxShadow: 'var(--shadow-md)' }}
                             >
-                                <div style={{ position: 'absolute', top: '-15px', left: '20px', background: '#0a0a0a', padding: '0 10px', color: '#888', fontWeight: 'bold', fontSize: '1.2rem' }}>
+                                <div style={{ position: 'absolute', top: '10px', left: '10px', background: 'rgba(0,0,0,0.8)', padding: '4px 12px', color: '#fff', fontWeight: 'bold', fontSize: '1rem', borderRadius: '4px', zIndex: 10 }}>
                                     HIER
                                 </div>
-                                <div style={{ color: '#0f0', textAlign: 'left', fontSize: '0.95rem', lineHeight: 1.6 }}>
-                                    &lt;html&gt;<br />
-                                    &nbsp;&nbsp;&lt;body&gt;<br />
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Bienvenue&lt;/h1&gt;<br />
-                                    &nbsp;&nbsp;&lt;/body&gt;<br />
-                                    &lt;/html&gt;
-                                </div>
-                                <Code size={40} color="#555" style={{ marginTop: '1.5rem', opacity: 0.5 }} />
+                                <img src="/images/vintage.png" alt="1990s Web" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                             </motion.div>
 
                             {/* Aujourd'hui */}
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5, duration: 0.8 }}
-                                className="glass-panel"
-                                style={{ padding: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}
+                                style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)', height: '280px', boxShadow: 'var(--shadow-md)' }}
                             >
-                                <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: 'var(--color-bg-surface)', padding: '0 10px', color: 'var(--color-accent-blue)', fontWeight: 'bold', fontSize: '1.2rem', fontFamily: 'var(--font-primary)', borderRadius: '4px' }}>
+                                <div style={{ position: 'absolute', top: '10px', left: '10px', background: 'var(--color-accent-blue)', padding: '4px 12px', color: '#fff', fontWeight: 'bold', fontSize: '1rem', borderRadius: '4px', zIndex: 10 }}>
                                     AUJOURD'HUI
                                 </div>
-                                <div style={{ display: 'flex', gap: '1.5rem', color: '#fff', marginBottom: '1.5rem', marginTop: '1rem' }}>
-                                    <Smartphone size={46} strokeWidth={1.5} />
-                                    <Monitor size={46} strokeWidth={1.5} />
-                                </div>
-                                <div style={{ fontSize: '1.1rem', fontWeight: 500, color: 'var(--color-text-primary)' }}>Web & Apps Mobiles</div>
-                                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', marginTop: '0.5rem' }}>Ecosystème connecté</p>
+                                <img src="/images/modern.png" alt="Modern SaaS" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                             </motion.div>
 
                             {/* Demain */}
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.5, duration: 0.8 }}
-                                style={{
-                                    padding: '2rem',
-                                    background: 'none',
-                                    border: '1px solid rgba(139, 92, 246, 0.3)',
-                                    borderRadius: '16px',
-                                    display: 'flex', flexDirection: 'column', alignItems: 'center',
-                                    position: 'relative',
-                                    overflow: 'hidden'
-                                }}
+                                style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)', height: '280px', boxShadow: 'var(--shadow-md)' }}
                             >
-                                {/* Glow effect */}
-                                <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, rgba(139, 92, 246, 0.2) 0%, transparent 70%)', zIndex: 0 }}></div>
-
-                                <div style={{ position: 'relative', zIndex: 1, top: '-35px', background: 'var(--color-bg-base)', padding: '0 10px', color: 'var(--color-accent-purple)', fontWeight: 'bold', fontSize: '1.2rem', fontFamily: 'var(--font-primary)' }}>
+                                <div style={{ position: 'absolute', top: '10px', left: '10px', background: 'var(--color-accent-purple)', padding: '4px 12px', color: '#fff', fontWeight: 'bold', fontSize: '1rem', borderRadius: '4px', zIndex: 10 }}>
                                     DEMAIN
                                 </div>
-                                <motion.div
-                                    animate={{ y: [-5, 5, -5] }}
-                                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                                    style={{ position: 'relative', zIndex: 1, marginTop: '-10px' }}
-                                >
-                                    <Hexagon size={56} color="#c4a7e7" strokeWidth={1} />
-                                </motion.div>
-                                <div style={{ position: 'relative', zIndex: 1, fontSize: '1.1rem', fontWeight: 600, marginTop: '1.5rem', color: '#fff', textShadow: '0 0 10px rgba(139,92,246,0.8)' }}>
-                                    XR & Hologrammes
-                                </div>
-                                <p style={{ position: 'relative', zIndex: 1, fontSize: '0.85rem', color: '#a0a0b0', marginTop: '0.5rem' }}>Expériences immersives</p>
+                                <img src="/images/future.png" alt="Future AR" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                             </motion.div>
                         </div>
                     </motion.div>

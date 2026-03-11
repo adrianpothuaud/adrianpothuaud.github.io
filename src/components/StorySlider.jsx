@@ -37,19 +37,18 @@ const StorySlider = () => {
                         style={{ padding: '3rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', justifyContent: 'center' }}
                     >
                         <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem', textAlign: 'center' }}>L'évolution du Numérique</h3>
-                        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', width: '100%' }}>
-                            <div style={{ flex: 1, padding: '1rem', background: '#0a0a0a', border: '1px solid #333', borderRadius: '8px', textAlign: 'center' }}>
-                                <Code size={24} color="#888" style={{ marginBottom: '0.5rem' }} />
-                                <div style={{ fontSize: '0.8rem', color: '#888' }}>Hier</div>
-                                <div style={{ fontSize: '0.7rem', color: '#0f0', fontFamily: 'monospace', marginTop: '0.5rem' }}>&lt;html&gt;</div>
+                        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', width: '100%', height: '220px' }}>
+                            <div style={{ flex: 1, position: 'relative', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)' }}>
+                                <img src="/images/vintage.png" alt="1990s Web" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(0,0,0,0.7)', color: '#fff', fontSize: '0.8rem', padding: '4px', textAlign: 'center', fontWeight: 'bold' }}>Hier</div>
                             </div>
-                            <div style={{ flex: 1, padding: '1rem', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '8px', textAlign: 'center' }}>
-                                <Smartphone size={24} color="var(--color-accent-blue)" style={{ marginBottom: '0.5rem' }} />
-                                <div style={{ fontSize: '0.8rem', color: 'var(--color-accent-blue)' }}>Aujourd'hui</div>
+                            <div style={{ flex: 1, position: 'relative', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)' }}>
+                                <img src="/images/modern.png" alt="Modern SaaS" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'var(--color-accent-blue)', color: '#fff', fontSize: '0.8rem', padding: '4px', textAlign: 'center', fontWeight: 'bold' }}>Aujourd'hui</div>
                             </div>
-                            <div style={{ flex: 1, padding: '1rem', background: 'rgba(139, 92, 246, 0.1)', border: '1px solid rgba(139, 92, 246, 0.3)', borderRadius: '8px', textAlign: 'center' }}>
-                                <motion.div animate={{ y: [-2, 2, -2] }} transition={{ repeat: Infinity, duration: 2 }}><Hexagon size={24} color="var(--color-accent-purple)" style={{ marginBottom: '0.5rem' }} /></motion.div>
-                                <div style={{ fontSize: '0.8rem', color: 'var(--color-accent-purple)' }}>Demain</div>
+                            <div style={{ flex: 1, position: 'relative', borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.1)' }}>
+                                <img src="/images/future.png" alt="Future AR" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'var(--color-accent-purple)', color: '#fff', fontSize: '0.8rem', padding: '4px', textAlign: 'center', fontWeight: 'bold' }}>Demain</div>
                             </div>
                         </div>
                     </motion.div>

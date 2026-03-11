@@ -1,27 +1,26 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-
-const experiences = [
-    {
-        role: "Lead QA Engineer",
-        company: "Tech Solutions Inc.",
-        period: "2021 - Présent",
-        description: "Mise en place de l'industrialisation des tests avec Playwright. Réduction du temps de build CI de 45%.",
-    },
-    {
-        role: "Consultant Automatisation",
-        company: "E-commerce Group",
-        period: "2018 - 2021",
-        description: "Création d'un framework Cypress from scratch pour 5 équipes au sein d'une architecture micro-services.",
-    },
-    {
-        role: "Analyste Test & Recette",
-        company: "Bank Finance",
-        period: "2015 - 2018",
-        description: "Stratégie de test Selenium pour des parcours critiques bancaires.",
-    }
-];
+import ReactMarkdown from 'react-markdown';
+import { loadMarkdownContent } from '../utils/markdown';
 
 const ExperienceTimeline = () => {
+    const [experiences, setExperiences] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchContent = async () => {
+            // Import all markdown files in the experience directory
+            const globResult = import.meta.glob('../content/experience/*.md', { query: '?raw', import: 'default' });
+            const posts = await loadMarkdownContent(globResult);
+            // Sort by order
+            setExperiences(posts.sort((a, b) => a.order - b.order));
+            setLoading(false);
+        };
+        fetchContent();
+    }, []);
+
+    if (loading) return null;
+
     return (
         <section id="experience" style={{ padding: 'var(--space-2xl) 0', position: 'relative' }}>
             <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
@@ -30,7 +29,7 @@ const ExperienceTimeline = () => {
 
             <div style={{ maxWidth: '800px', margin: '0 auto', position: 'relative' }}>
                 {/* Ligne verticale de la timeline */}
-                <div style={{ position: 'absolute', left: '24px', top: '10px', bottom: '10px', width: '2px', background: 'rgba(255,255,255,0.1)' }}></div>
+                <div style={{ position: 'absolute', left: '24px', top: '10px', bottom: '10px', width: '2px', background: 'rgba(0,0,0,0.1)' }}></div>
 
                 {experiences.map((exp, idx) => (
                     <motion.div
@@ -53,7 +52,9 @@ const ExperienceTimeline = () => {
                                 <span style={{ fontSize: '0.9rem', color: 'var(--color-accent-purple)', fontWeight: 500 }}>{exp.period}</span>
                             </div>
                             <h4 style={{ fontSize: '1rem', color: 'var(--color-text-secondary)', marginBottom: '1rem', fontWeight: 400 }}>{exp.company}</h4>
-                            <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>{exp.description}</p>
+                            <div style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }} className="markdown-content">
+                                <ReactMarkdown>{exp.content}</ReactMarkdown>
+                            </div>
                         </div>
                     </motion.div>
                 ))}

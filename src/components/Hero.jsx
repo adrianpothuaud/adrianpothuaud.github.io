@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { Terminal, ShieldCheck, Zap, Code2 } from 'lucide-react';
 import StorySlider from './StorySlider';
+import OpenToWorkBadge from './OpenToWorkBadge';
+import { APP_CONFIG } from '../config';
 
 const Hero = () => {
     return (
@@ -22,11 +24,16 @@ const Hero = () => {
                     transition={{ duration: 0.8 }}
                     style={{ textAlign: 'left' }}
                 >
-                    <div style={{ display: 'inline-block', padding: '0.5rem 1rem', background: 'var(--color-bg-surface)', borderRadius: 'var(--radius-full)', border: '1px solid rgba(255,255,255,0.1)', marginBottom: 'var(--space-md)' }}>
-                        <span style={{ color: 'var(--color-accent-red)', fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-accent-red)', animation: 'pulse 2s infinite' }}></span>
-                            Il est temps d'arrêter la casse.
-                        </span>
+                    <div style={{ marginBottom: 'var(--space-md)' }}>
+                        {APP_CONFIG.OPEN_TO_WORK ? (
+                            <OpenToWorkBadge />
+                        ) : (
+                            <div style={{ display: 'inline-block', padding: '0.5rem 1rem', background: 'var(--color-bg-surface)', borderRadius: 'var(--radius-full)', border: '1px solid rgba(0,0,0,0.1)' }}>
+                                <span style={{ color: 'var(--color-accent-blue)', fontWeight: 600, fontSize: '0.9rem' }}>
+                                    Expert QA & Automatisation
+                                </span>
+                            </div>
+                        )}
                     </div>
 
                     <h1 style={{ fontSize: '3.5rem', marginBottom: 'var(--space-md)', lineHeight: 1.1 }}>
@@ -40,7 +47,7 @@ const Hero = () => {
                     </p>
 
                     <div style={{ display: 'flex', gap: '1rem' }}>
-                        <a href="#services" style={{
+                        <a href="/#services" style={{
                             background: 'var(--color-accent-blue)',
                             color: '#fff',
                             padding: '0.75rem 1.5rem',
@@ -51,7 +58,7 @@ const Hero = () => {
                             Découvrir les Formations
                         </a>
 
-                        <a href="#contact" style={{
+                        <a href="/#contact" style={{
                             background: 'transparent',
                             color: 'var(--color-text-primary)',
                             border: '1px solid var(--color-text-secondary)',

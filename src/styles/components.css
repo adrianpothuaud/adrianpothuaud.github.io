@@ -1,0 +1,10 @@
+/* src/styles/components.css */
+.responsive-badge {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .responsive-badge {
+        display: block !important;
+    }
+}
