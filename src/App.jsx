@@ -44,10 +44,23 @@ function App() {
               </Routes>
             </div>
 
-            <footer style={{ textAlign: 'center', padding: 'var(--space-xl) 0', borderTop: '1px solid rgba(0,0,0,0.05)', color: 'var(--color-text-secondary)', fontSize: '0.9rem' }}>
+            <footer className="footer">
               <div className="container">
-                <p>© {new Date().getFullYear()} Adrian Pothuaud. Tous droits réservés.</p>
-                <p style={{ marginTop: '0.5rem', opacity: 0.7 }}>Conçu avec Vite, React & Framer Motion.</p>
+                <div className="footer-inner">
+                  <div>
+                    <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.25rem' }}>
+                      A<span className="text-gradient">.Pothuaud</span>
+                    </p>
+                    <p className="footer-copy">© {new Date().getFullYear()} Adrian Pothuaud · Senior QA Engineer & Formateur</p>
+                  </div>
+                  <div className="footer-links">
+                    <a href="/#services" className="footer-link">Formations</a>
+                    <a href="/#experience" className="footer-link">Parcours</a>
+                    <a href="/blog" className="footer-link">Blog</a>
+                    <a href="/#contact" className="footer-link">Contact</a>
+                    <a href="https://www.linkedin.com/in/adrianpothuaud/" target="_blank" rel="noopener noreferrer" className="footer-link">LinkedIn</a>
+                  </div>
+                </div>
               </div>
             </footer>
           </main>

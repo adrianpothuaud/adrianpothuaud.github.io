@@ -21,36 +21,37 @@ const Testimonials = () => {
     if (loading || testimonials.length === 0) return null;
 
     return (
-        <section id="testimonials" style={{ padding: 'var(--space-2xl) 0', background: 'rgba(0,0,0,0.02)', borderTop: '1px solid rgba(0,0,0,0.05)', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
+        <section id="testimonials" style={{ padding: 'var(--space-2xl) 0', background: 'var(--color-bg-surface-solid)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
             <div className="container">
-                <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
-                    <h2 style={{ fontSize: '2.5rem' }}>Ce qu'ils disent <span className="text-gradient">de mes formations</span></h2>
+                <div className="section-header">
+                    <span className="section-label">Témoignages</span>
+                    <h2>Ce qu&apos;ils disent <span className="text-gradient">de mes formations</span></h2>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+                <div className="testimonials-grid">
                     {testimonials.map((testi, idx) => (
                         <motion.div
                             key={idx}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            viewport={{ once: true, margin: '-50px' }}
+                            transition={{ duration: 0.45, delay: idx * 0.1 }}
                             className="glass-panel"
-                            style={{ padding: '2rem', position: 'relative' }}
+                            style={{ padding: '1.75rem', position: 'relative', background: '#ffffff' }}
                         >
-                            <Quote size={40} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', opacity: 0.1, color: 'var(--color-accent-blue)' }} />
+                            <Quote size={32} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', opacity: 0.08, color: 'var(--color-accent-blue)' }} />
 
-                            <div style={{ fontSize: '1.1rem', color: 'var(--color-text-secondary)', fontStyle: 'italic', marginBottom: '1.5rem', lineHeight: 1.6, position: 'relative', zIndex: 1 }}>
+                            <div style={{ fontSize: '0.975rem', color: 'var(--color-text-secondary)', fontStyle: 'italic', marginBottom: '1.5rem', lineHeight: 1.7, position: 'relative', zIndex: 1 }} className="markdown-content">
                                 <ReactMarkdown>{testi.content}</ReactMarkdown>
                             </div>
 
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--gradient-primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', paddingTop: '1.25rem', borderTop: '1px solid var(--color-border)' }}>
+                                <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'var(--gradient-primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.9rem', flexShrink: 0 }}>
                                     {testi.name ? testi.name.charAt(0) : '?'}
                                 </div>
                                 <div>
-                                    <h4 style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--color-text-primary)' }}>{testi.name}</h4>
-                                    <span style={{ fontSize: '0.85rem', color: 'var(--color-accent-purple)' }}>{testi.role}</span>
+                                    <p style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-text-primary)', marginBottom: 0 }}>{testi.name}</p>
+                                    <span style={{ fontSize: '0.8rem', color: 'var(--color-accent-purple)' }}>{testi.role}</span>
                                 </div>
                             </div>
                         </motion.div>

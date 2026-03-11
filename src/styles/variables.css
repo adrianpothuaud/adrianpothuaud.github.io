@@ -3,24 +3,28 @@
   /* Color Palette - Light Modern Theme */
   --color-bg-base: #ffffff;
   --color-bg-surface: rgba(249, 250, 251, 0.8);
+  --color-bg-surface-solid: #f9fafb;
   --color-bg-surface-hover: rgba(243, 244, 246, 1);
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(37, 99, 235, 0.4);
   --color-text-primary: #111827;
-  --color-text-secondary: #4b5563;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
 
   /* Accent Colors */
   --color-accent-blue: #2563eb;
-  /* Pour Selenium / UI générale */
   --color-accent-purple: #7c3aed;
-  /* Cypress / Touches premium */
   --color-accent-green: #059669;
-  /* WDIO / Succès */
   --color-accent-red: #dc2626;
-  /* Bugs / Glitch sequence */
+  --color-accent-blue-light: rgba(37, 99, 235, 0.1);
+  --color-accent-purple-light: rgba(124, 58, 237, 0.1);
+  --color-accent-green-light: rgba(5, 150, 105, 0.1);
 
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--color-accent-blue) 0%, var(--color-accent-purple) 100%);
   --gradient-text: linear-gradient(to right, #111827, #4b5563);
-  --gradient-glow: radial-gradient(circle at center, rgba(37, 99, 235, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+  --gradient-glow: radial-gradient(ellipse at 60% 0%, rgba(37, 99, 235, 0.06) 0%, rgba(124, 58, 237, 0.03) 40%, rgba(255, 255, 255, 0) 70%);
+  --gradient-subtle: linear-gradient(180deg, rgba(249, 250, 251, 0) 0%, rgba(249, 250, 251, 1) 100%);
 
   /* Typography */
   --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
@@ -32,21 +36,24 @@
   --space-md: 1rem;
   --space-lg: 1.5rem;
   --space-xl: clamp(1.5rem, 4vw, 2rem);
-  --space-2xl: clamp(2.5rem, 8vw, 4rem);
+  --space-2xl: clamp(3rem, 8vw, 5rem);
 
   /* Border Radius */
   --radius-sm: 0.5rem;
-  --radius-md: 1rem;
-  --radius-lg: 1.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.5rem;
   --radius-full: 9999px;
 
   /* Transitions */
   --transition-fast: 0.15s ease-out;
-  --transition-normal: 0.3s ease-out;
-  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s ease-out;
+  --transition-slow: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Shadows for Light Theme */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+  --shadow-blue: 0 4px 14px 0 rgba(37, 99, 235, 0.25);
 }

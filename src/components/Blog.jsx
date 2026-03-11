@@ -12,7 +12,6 @@ const Blog = () => {
         const fetchContent = async () => {
             const globResult = import.meta.glob('../content/blog/*.md', { query: '?raw', import: 'default' });
             const posts = await loadMarkdownContent(globResult);
-            // Take only the 3 latest posts for the home section
             setArticles(posts.slice(0, 3));
             setLoading(false);
         };
@@ -23,65 +22,60 @@ const Blog = () => {
 
     return (
         <section id="blog" style={{ padding: 'var(--space-2xl) 0', position: 'relative' }}>
-            <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
-                <h2 style={{ fontSize: '2.5rem' }}>Derniers <span className="text-gradient">Articles</span></h2>
-                <p style={{ color: 'var(--color-text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
-                    Consultez l'ensemble de nos guides ou <Link to="/blog" style={{ color: 'var(--color-accent-blue)', textDecoration: 'underline' }}>lancez une recherche</Link>.
+            <div className="section-header">
+                <span className="section-label">Blog</span>
+                <h2>Derniers <span className="text-gradient">Articles</span></h2>
+                <p>
+                    Guides pratiques et réflexions sur la QA moderne. <Link to="/blog" style={{ color: 'var(--color-accent-blue)', fontWeight: 500 }}>Voir tous les articles →</Link>
                 </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+            <div className="blog-grid">
                 {articles.map((article, idx) => (
                     <Link to={`/blog/${article.slug}`} key={idx} style={{ textDecoration: 'none', display: 'flex' }}>
                         <motion.article
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: idx * 0.1 }}
+                            viewport={{ once: true, margin: '-50px' }}
+                            transition={{ duration: 0.45, delay: idx * 0.1 }}
                             className="glass-panel"
                             style={{
-                                padding: '2rem',
+                                padding: '1.75rem',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 cursor: 'pointer',
-                                transition: 'transform 0.3s, border-color 0.3s',
                                 width: '100%'
                             }}
-                            whileHover={{ y: -5, borderColor: 'var(--color-accent-blue)' }}
+                            whileHover={{ y: -5 }}
                         >
-                            <div style={{ display: 'flex', gap: '1.5rem', color: 'var(--color-text-secondary)', fontSize: '0.85rem', marginBottom: '1rem' }}>
-                                {article.date && <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Calendar size={14} /> {article.date}</span>}
-                                {article.readTime && <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Clock size={14} /> {article.readTime}</span>}
-                            </div>
+                            {article.tags && article.tags.length > 0 && (
+                                <div style={{ marginBottom: '0.875rem' }}>
+                                    <span style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-accent-blue)', background: 'var(--color-accent-blue-light)', padding: '0.25rem 0.6rem', borderRadius: 'var(--radius-full)' }}>
+                                        {article.tags[0]}
+                                    </span>
+                                </div>
+                            )}
 
-                            <h3 style={{ fontSize: '1.4rem', color: 'var(--color-text-primary)', marginBottom: '1rem', lineHeight: 1.3 }}>
+                            <h3 style={{ fontSize: '1.1rem', color: 'var(--color-text-primary)', marginBottom: '0.75rem', lineHeight: 1.4, letterSpacing: '-0.01em' }}>
                                 {article.title}
                             </h3>
 
-                            <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6, marginBottom: '2rem', flexGrow: 1 }}>
+                            <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.65, marginBottom: '1.25rem', flexGrow: 1, fontSize: '0.9rem' }}>
                                 {article.excerpt}
                             </p>
 
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-accent-blue)', fontWeight: 600, fontSize: '0.9rem', marginTop: 'auto' }}>
-                                Lire l'article <ChevronRight size={16} />
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '1rem', borderTop: '1px solid var(--color-border)' }}>
+                                <div style={{ display: 'flex', gap: '1rem', color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>
+                                    {article.date && <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}><Calendar size={13} /> {article.date}</span>}
+                                    {article.readTime && <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}><Clock size={13} /> {article.readTime}</span>}
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--color-accent-blue)', fontWeight: 600, fontSize: '0.82rem' }}>
+                                    Lire <ChevronRight size={14} />
+                                </div>
                             </div>
                         </motion.article>
                     </Link>
                 ))}
-            </div>
-
-            <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-                <Link to="/blog" style={{
-                    display: 'inline-block',
-                    padding: '12px 24px',
-                    background: 'var(--color-bg-surface)',
-                    border: '1px solid var(--color-accent-blue)',
-                    borderRadius: 'var(--radius-md)',
-                    color: 'var(--color-text-primary)',
-                    fontWeight: 600
-                }}>
-                    Voir tous les articles
-                </Link>
             </div>
         </section>
     );

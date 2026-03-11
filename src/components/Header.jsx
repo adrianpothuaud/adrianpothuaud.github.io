@@ -7,19 +7,16 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [scrolled, setScrolled] = useState(false);
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+            setScrolled(window.scrollY > 40);
         };
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Empêcher le scroll du body quand le menu mobile est ouvert
     useEffect(() => {
         if (isMenuOpen) {
             document.body.style.overflow = 'hidden';
@@ -47,16 +44,21 @@ const Header = () => {
                 left: 0,
                 right: 0,
                 zIndex: 40,
-                padding: '1rem 0',
-                background: scrolled && !isMenuOpen ? 'rgba(255, 255, 255, 0.8)' : 'transparent',
-                backdropFilter: scrolled && !isMenuOpen ? 'blur(12px)' : 'none',
-                borderBottom: scrolled && !isMenuOpen ? '1px solid rgba(0, 0, 0, 0.05)' : '1px solid transparent',
-                transition: 'all 0.3s ease'
+                padding: '0.875rem 0',
+                background: scrolled && !isMenuOpen ? 'rgba(255, 255, 255, 0.85)' : 'transparent',
+                backdropFilter: scrolled && !isMenuOpen ? 'blur(16px)' : 'none',
+                WebkitBackdropFilter: scrolled && !isMenuOpen ? 'blur(16px)' : 'none',
+                borderBottom: scrolled && !isMenuOpen ? '1px solid var(--color-border)' : '1px solid transparent',
+                transition: 'background 0.3s ease, border-color 0.3s ease'
             }}
         >
             <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', zIndex: 50 }}>
-                    <Link to="/" onClick={() => setIsMenuOpen(false)} style={{ fontSize: '1.25rem', fontWeight: 700, fontFamily: 'var(--font-display)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', zIndex: 50 }}>
+                    <Link
+                        to="/"
+                        onClick={() => setIsMenuOpen(false)}
+                        style={{ fontSize: '1.15rem', fontWeight: 700, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
+                    >
                         A<span className="text-gradient">.Pothuaud</span>
                     </Link>
                     {APP_CONFIG.OPEN_TO_WORK && <div className="responsive-badge"><OpenToWorkBadge /></div>}
@@ -66,32 +68,24 @@ const Header = () => {
                 <button
                     className="mobile-menu-btn"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    aria-label="Menu"
+                    aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
                 >
-                    {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
 
                 {/* Desktop Navigation */}
                 <nav className="desktop-nav">
-                    <ul style={{ display: 'flex', gap: '2rem', margin: 0, alignItems: 'center' }}>
+                    <ul style={{ display: 'flex', gap: '0.25rem', margin: 0, alignItems: 'center' }}>
                         {navLinks.map((link, idx) => (
                             <li key={idx}>
                                 {link.isRoute ?
-                                    <Link to={link.href} style={{ fontSize: '0.9rem', fontWeight: 500, color: 'var(--color-text-secondary)' }}>{link.name}</Link> :
-                                    <a href={link.href} style={{ fontSize: '0.9rem', fontWeight: 500, color: 'var(--color-text-secondary)' }}>{link.name}</a>
+                                    <Link to={link.href} className="nav-link" style={{ padding: '0.4rem 0.75rem', display: 'block' }}>{link.name}</Link> :
+                                    <a href={link.href} className="nav-link" style={{ padding: '0.4rem 0.75rem', display: 'block' }}>{link.name}</a>
                                 }
                             </li>
                         ))}
-                        <li>
-                            <a href="/#contact" style={{
-                                fontSize: '0.9rem',
-                                fontWeight: 600,
-                                color: 'var(--color-accent-blue)',
-                                background: 'transparent',
-                                padding: '0.5rem 1rem',
-                                borderRadius: '100px',
-                                border: '1px solid var(--color-accent-blue)'
-                            }}>
+                        <li style={{ marginLeft: '0.5rem' }}>
+                            <a href="/#contact" className="btn-primary" style={{ padding: '0.5rem 1.1rem', fontSize: '0.875rem', borderRadius: 'var(--radius-full)' }}>
                                 Me contacter
                             </a>
                         </li>
@@ -114,7 +108,7 @@ const Header = () => {
                                         key={idx}
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.1 * (idx + 1) }}
+                                        transition={{ delay: 0.08 * (idx + 1) }}
                                     >
                                         {link.isRoute ?
                                             <Link to={link.href} onClick={() => setIsMenuOpen(false)} style={{ fontWeight: 600, color: 'var(--color-text-primary)' }}>{link.name}</Link> :
@@ -125,17 +119,14 @@ const Header = () => {
                                 <motion.li
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.5 }}
-                                    style={{ marginTop: '2rem' }}
+                                    transition={{ delay: 0.4 }}
+                                    style={{ marginTop: '1.5rem' }}
                                 >
-                                    <a href="/#contact" onClick={() => setIsMenuOpen(false)} style={{
+                                    <a href="/#contact" onClick={() => setIsMenuOpen(false)} className="btn-primary" style={{
                                         fontSize: '1.1rem',
-                                        fontWeight: 600,
-                                        color: '#fff',
-                                        background: 'var(--gradient-primary)',
-                                        padding: '0.8rem 2rem',
-                                        borderRadius: '100px',
-                                        display: 'inline-block'
+                                        padding: '0.9rem 2.5rem',
+                                        borderRadius: 'var(--radius-full)',
+                                        background: 'var(--gradient-primary)'
                                     }}>
                                         Me contacter
                                     </a>
