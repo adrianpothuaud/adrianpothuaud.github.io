@@ -16,6 +16,23 @@
     rel="stylesheet">
 
   <title>Adrian Pothuaud | Qualité Logicielle & Automatisation</title>
+
+  <!-- Single Page Apps on GitHub Pages – restore the URL encoded by 404.html -->
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var path = params.get('p');
+      if (path) {
+        var query = params.get('q');
+        window.history.replaceState(
+          {}, null,
+          path.replace(/~and~/g, '&') +
+          (query ? '?' + query.replace(/~and~/g, '&') : '') +
+          window.location.hash
+        );
+      }
+    })();
+  </script>
 </head>
 
 <body>
