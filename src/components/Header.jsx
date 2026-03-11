@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Linkedin, BookOpen } from 'lucide-react';
 import { APP_CONFIG } from '../config';
 import OpenToWorkBadge from './OpenToWorkBadge';
 import { Link } from 'react-router-dom';
@@ -82,6 +82,16 @@ const Header = () => {
                                 }
                             </li>
                         ))}
+                        <li>
+                            <a href="https://www.linkedin.com/in/adrian-pothuaud/" target="_blank" rel="noopener noreferrer" title="LinkedIn" style={{ color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'center' }}>
+                                <Linkedin size={18} />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://medium.com/@adrianpothuaud" target="_blank" rel="noopener noreferrer" title="Blog Medium" style={{ color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'center' }}>
+                                <BookOpen size={18} />
+                            </a>
+                        </li>
                         <li>
                             <a href="/#contact" style={{
                                 fontSize: '0.9rem',

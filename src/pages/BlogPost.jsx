@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
-import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, User, ExternalLink } from 'lucide-react';
 import { loadMarkdownContent } from '../utils/markdown';
 import SEO from '../components/SEO';
 
@@ -87,6 +87,29 @@ const BlogPost = () => {
                                 {tag}
                             </span>
                         ))}
+                    </div>
+                )}
+
+                {post.mediumUrl && (
+                    <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+                        <a
+                            href={post.mediumUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                color: 'var(--color-text-secondary)',
+                                fontSize: '0.9rem',
+                                padding: '0.6rem 1.2rem',
+                                border: '1px solid rgba(0,0,0,0.15)',
+                                borderRadius: 'var(--radius-full)',
+                                transition: 'color 0.2s, border-color 0.2s'
+                            }}
+                        >
+                            <ExternalLink size={14} /> Lire l'article original sur Medium
+                        </a>
                     </div>
                 )}
             </motion.div>

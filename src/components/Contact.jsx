@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, MapPin } from 'lucide-react';
+import { Send, MapPin, Linkedin, BookOpen } from 'lucide-react';
 
 const Contact = () => {
     const [formState, setFormState] = useState({ name: '', email: '', message: '' });
@@ -44,6 +44,31 @@ const Contact = () => {
                                 <MapPin size={20} />
                             </div>
                             <span style={{ fontSize: '1rem' }}>Indépendant / Remote France</span>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+                            <a
+                                href="https://www.linkedin.com/in/adrian-pothuaud/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--color-text-secondary)', textDecoration: 'none' }}
+                            >
+                                <div style={{ padding: '10px', background: 'rgba(10, 102, 194, 0.1)', borderRadius: '50%', color: '#0a66c2' }}>
+                                    <Linkedin size={20} />
+                                </div>
+                                <span style={{ fontSize: '1rem' }}>LinkedIn</span>
+                            </a>
+                            <a
+                                href="https://medium.com/@adrianpothuaud"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--color-text-secondary)', textDecoration: 'none' }}
+                            >
+                                <div style={{ padding: '10px', background: 'rgba(0, 0, 0, 0.05)', borderRadius: '50%', color: 'var(--color-text-primary)' }}>
+                                    <BookOpen size={20} />
+                                </div>
+                                <span style={{ fontSize: '1rem' }}>Medium</span>
+                            </a>
                         </div>
                     </div>
                 </motion.div>
