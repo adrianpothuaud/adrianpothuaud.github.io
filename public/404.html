@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Adrian Pothuaud</title>
+  <script>
+    // Single Page Apps on GitHub Pages
+    // https://github.com/rafgraph/spa-github-pages
+    // This script encodes the URL path into a query parameter before redirecting
+    // to the main index.html, so React Router can handle the route.
+    (function () {
+      var l = window.location;
+      // pathSegmentsToKeep = 0 because this is a user/org site (root domain)
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        '/?p=/' +
+        l.pathname.slice(1).replace(/&/g, '~and~') +
+        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    })();
+  </script>
+</head>
+<body></body>
+</html>
