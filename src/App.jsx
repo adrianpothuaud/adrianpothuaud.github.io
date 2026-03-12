@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import BlogList from './pages/BlogList';
 import BlogPost from './pages/BlogPost';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
   const [showIntro, setShowIntro] = useState(() => {
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/blog" element={<BlogList />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
               </Routes>
             </div>
 
@@ -59,6 +61,7 @@ function App() {
                     <a href="/blog" className="footer-link">Blog</a>
                     <a href="/#contact" className="footer-link">Contact</a>
                     <a href="https://www.linkedin.com/in/adrianpothuaud/" target="_blank" rel="noopener noreferrer" className="footer-link">LinkedIn</a>
+                    <a href="/privacy" className="footer-link">Confidentialité</a>
                   </div>
                 </div>
               </div>
