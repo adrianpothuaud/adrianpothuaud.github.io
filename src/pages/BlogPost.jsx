@@ -58,6 +58,8 @@ const BlogPost = () => {
                 description={post.excerpt}
                 url={`/blog/${post.slug}`}
                 isBlogPost={true}
+                date={post.date}
+                tags={post.tags}
             />
 
             <div style={{ maxWidth: '720px', margin: '0 auto', padding: '0 var(--space-xl)' }}>
