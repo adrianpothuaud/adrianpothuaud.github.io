@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
 import IntroSequence from './components/IntroSequence';
 import Header from './components/Header';
+import { trackPageView } from './utils/analytics';
 
 import Home from './pages/Home';
 import BlogList from './pages/BlogList';
@@ -11,6 +12,13 @@ import BlogPost from './pages/BlogPost';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
+  const location = useLocation();
+
+  // Suivi Google Analytics sur chaque changement de route
+  useEffect(() => {
+    trackPageView(location.pathname + location.search);
+  }, [location]);
+
   const [showIntro, setShowIntro] = useState(() => {
     // Detecter les robots d'indexation (SEO)
     const isBot = /bot|googlebot|crawler|spider|robot|crawling|lighthouse/i.test(navigator.userAgent);

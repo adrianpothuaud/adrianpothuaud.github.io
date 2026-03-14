@@ -16,12 +16,23 @@ export const APP_CONFIG = {
     EMAILJS_SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
     EMAILJS_TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
     EMAILJS_PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+
+    // Google Analytics
+    GA_MEASUREMENT_ID: import.meta.env.VITE_GA_MEASUREMENT_ID,
+
+    // Google AdSense
+    ADSENSE_PUB_ID: import.meta.env.VITE_ADSENSE_PUB_ID,
+
+    // Google Search Console
+    GOOGLE_SITE_VERIFICATION: import.meta.env.VITE_GOOGLE_SITE_VERIFICATION,
 };
 
 if (import.meta.env.DEV) {
-    const missing = ['VITE_EMAILJS_SERVICE_ID', 'VITE_EMAILJS_TEMPLATE_ID', 'VITE_EMAILJS_PUBLIC_KEY']
-        .filter((key) => !import.meta.env[key]);
+    const missing = [
+        'VITE_EMAILJS_SERVICE_ID', 'VITE_EMAILJS_TEMPLATE_ID', 'VITE_EMAILJS_PUBLIC_KEY',
+        'VITE_GA_MEASUREMENT_ID', 'VITE_ADSENSE_PUB_ID', 'VITE_GOOGLE_SITE_VERIFICATION',
+    ].filter((key) => !import.meta.env[key]);
     if (missing.length > 0) {
-        console.warn(`[Contact] EmailJS env variables manquantes : ${missing.join(', ')}. Copiez .env.example en .env et renseignez vos clés.`);
+        console.warn(`[Config] Variables d'environnement manquantes : ${missing.join(', ')}. Copiez .env.example en .env et renseignez vos valeurs.`);
     }
 }

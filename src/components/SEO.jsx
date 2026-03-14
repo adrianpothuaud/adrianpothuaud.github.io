@@ -18,6 +18,14 @@ const SEO = ({ title, description, url = '', isBlogPost = false, author = 'Adria
         "image": fullImage,
     };
 
+    // Schema WebSite pour Google Search Console (sitelinks, breadcrumbs)
+    const websiteSchema = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Adrian Pothuaud",
+        "url": siteUrl,
+    };
+
     if (isBlogPost) {
         baseSchema.headline = title;
         baseSchema.description = metaDescription;
@@ -87,6 +95,11 @@ const SEO = ({ title, description, url = '', isBlogPost = false, author = 'Adria
             <script type="application/ld+json">
                 {JSON.stringify(baseSchema)}
             </script>
+            {!isBlogPost && (
+                <script type="application/ld+json">
+                    {JSON.stringify(websiteSchema)}
+                </script>
+            )}
         </Helmet>
     );
 };
